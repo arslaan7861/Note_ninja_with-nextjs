@@ -1,5 +1,8 @@
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 import React from "react";
+import CustomLink from "./CustomLink";
 
 function Navbar() {
   return (
@@ -7,13 +10,10 @@ function Navbar() {
       <h1 className="md:text-3xl sm:text-xl text-lg uppercase font-bold">
         note ninja
       </h1>
-      <div>
-        <Link
-          href={"/profile"}
-          className="text-sm md:text-md hover:scale-110 font-semibold uppercase"
-        >
-          profile
-        </Link>
+      <div className="flex h-min gap-4 px-4">
+        <CustomLink path="/">home</CustomLink>
+        <CustomLink path="/profile">profile</CustomLink>
+        <CustomLink path="/notes">notes</CustomLink>
       </div>
     </nav>
   );

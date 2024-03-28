@@ -4,7 +4,8 @@ export const metadata = {
 };
 import Link from "next/link";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbar/Navbar";
+import ModalWrapper from "@/components/wrapper/ModalWrapper";
 const navLink: { href: string; linkName: string }[] = [
   {
     href: "/",
@@ -38,16 +39,21 @@ const navLink: { href: string; linkName: string }[] = [
 
 export default function RootLayout({
   children,
+  notemodal,
 }: {
   children: React.ReactNode;
+  notemodal: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body className="w-screen h-screen flex flex-col ">
-        <Navbar />
-        <main className=" pt-20 w-screen h-screen flex-grow bg-white">
-          {children}
-        </main>
+      <body>
+        <div className="h-screen w-screen overflow-y-auto font-para scrollbar-none">
+          <Navbar />
+          <main className="w-screen h-screen flex-grow bg-white">
+            {children}
+            {notemodal}
+          </main>
+        </div>
       </body>
     </html>
   );
