@@ -12,7 +12,7 @@ function Navbar() {
       </h1>
       <div className="flex h-min gap-4 px-4">
         <CustomLink path="/">home</CustomLink>
-        <CustomLink path="/profile">profile</CustomLink>
+        <CustomLink path="/api/auth/signin">signin</CustomLink>
         <CustomLink path="/notes">notes</CustomLink>
       </div>
     </nav>

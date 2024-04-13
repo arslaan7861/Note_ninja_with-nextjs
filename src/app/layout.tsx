@@ -36,8 +36,10 @@ const navLink: { href: string; linkName: string }[] = [
   //   linkName: "dashboard",
   // },
 ];
+import connectDb from "@/lib/connectDB";
 
-export default function RootLayout({
+// connectDb();
+export default async function RootLayout({
   children,
   notemodal,
 }: {

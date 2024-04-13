@@ -34,7 +34,7 @@ function Page() {
           return (
             <Link
               className="bg-black px-4 py-2 text-white"
-              href={`/${note}`}
+              href={`/notes/${note}`}
               key={note}
             >
               {note}
