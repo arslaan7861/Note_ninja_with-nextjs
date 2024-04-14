@@ -28,7 +28,12 @@ export default function Button({
       }}
     >
       <span className="relative h-full aspect-square">
-        <Image src={imgUrl} fill alt={provider}></Image>
+        <Image
+          src={imgUrl}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          fill
+          alt={provider}
+        ></Image>
       </span>
       <p
         style={{ color: bg ? "white" : "black" }}

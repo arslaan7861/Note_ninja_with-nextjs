@@ -1,6 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
+import axios, { AxiosError, AxiosResponse } from "axios";
+
 import Link from "next/link";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -33,19 +34,41 @@ function Login() {
     register,
     formState: { errors },
     handleSubmit,
+    setError,
   } = useForm<formFields>({
     resolver: zodResolver(schema),
   });
-  const submit: SubmitHandler<formFields> = (data) => {
-    console.log(data);
+  const submit: SubmitHandler<formFields> = async (dat) => {
+    try {
+      const res: AxiosResponse<any, any> | void = await axios.post(
+        "/api/auth/register",
+        dat,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      console.log(res?.data);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const {
+          message,
+          path,
+        }: { message: string; path: "username" | "password" | "email" } =
+          error.response?.data;
+        setError(path, { message });
+      } else {
+        setError("root", { message: "internal server error" });
+      }
+    }
   };
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit(submit)}>
+    <form className="flex flex-col gap-3" onSubmit={handleSubmit(submit)}>
       <div className="flex flex-col w-min ">
         <input
           {...register("username")}
           type="text"
-          className="p-1 sm:p-2 px-3 w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
+          className="p-1 sm:p-2  px-3 w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
           id="username"
           placeholder="Username"
         />
@@ -57,7 +80,7 @@ function Login() {
         <input
           {...register("email")}
           type="email"
-          className="p-1 sm:p-2 px-3 w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
+          className="p-1 sm:p-2  px-3 w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
           placeholder="Email"
         />
         {errors.email && (
@@ -68,9 +91,8 @@ function Login() {
         <input
           placeholder="Password"
           {...register("password")}
-          className="p-1 sm:p-2 px-3 w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
+          className="p-1 sm:p-2  px-3 w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
           type="password"
-          id="password"
         />
         {errors.password && (
           <p className="text-red-500 px-2 text-xs">{errors.password.message}</p>
@@ -80,9 +102,8 @@ function Login() {
         <input
           placeholder="confirm password"
           {...register("confirmPass")}
-          className="p-1 sm:p-2 px-3 w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
+          className="p-1 sm:p-2  px-3 w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
           type="password"
-          id="password"
         />
         {errors.confirmPass && (
           <p className="text-red-500 px-2 text-xs">
@@ -97,7 +118,10 @@ function Login() {
       >
         register
       </button>
-      <Link href="/auth/signin" className="text-sm font-medium">
+      {errors.root && (
+        <p className="text-red-500 px-2 text-xs">{errors.root.message}</p>
+      )}
+      <Link href="/auth/signin" replace className="text-sm font-medium">
         Already have an account ?{" "}
         <span className="font-semibold text-lg">Signin</span>
       </Link>

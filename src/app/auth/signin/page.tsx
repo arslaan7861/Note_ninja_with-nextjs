@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Signinbutton from "@/components/buttons/Loginbutton";
-import Image from "next/image";
 
 function Signin() {
   return (

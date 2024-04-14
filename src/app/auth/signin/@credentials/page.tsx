@@ -1,41 +1,62 @@
 "use client";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-type formFields = {
-  username: string;
-  password: string;
-};
+import { z } from "zod";
+const schema = z.object({
+  username: z
+    .string()
+    .nonempty("Please enter username")
+    .min(5, "Username must be 5 letters atleast"),
+  password: z
+    .string()
+    .nonempty("Please enter password")
+    .min(8, { message: "Password must be atleast 8 letters long" }),
+});
+type formFields = z.infer<typeof schema>;
 
 function Login() {
+  const router = useRouter();
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
+    setError,
     reset,
-  } = useForm<formFields>();
-  const submit: SubmitHandler<formFields> = (data) => {
-    console.log(data);
-    signIn("credentials", {
-      username: data.username,
-      password: data.password,
-      callbackUrl: "/",
-      redirect: true,
-    });
-    reset();
+  } = useForm<formFields>({
+    resolver: zodResolver(schema),
+  });
+  const submit: SubmitHandler<formFields> = async (data) => {
+    try {
+      const res = await signIn("credentials", {
+        username: data.username,
+        password: data.password,
+        redirect: false,
+      });
+      reset({ password: "" });
+      if (res?.error) {
+        const {
+          path,
+          message,
+        }: { message: string; path: "username" | "password" } =
+          await JSON.parse(res.error);
+        setError(path, { message });
+        return;
+      }
+      router.replace("/");
+    } catch (error) {
+      setError("root", { message: "something went wrong" });
+    }
   };
+
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(submit)}>
       <div className="flex flex-col w-min ">
         <input
-          {...register("username", {
-            required: "username is required",
-            minLength: {
-              value: 5,
-              message: "username must be atleast 5 characters",
-            },
-          })}
+          {...register("username")}
           type="text"
           className="p-2 px-3 w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
           id="username"
@@ -48,13 +69,7 @@ function Login() {
       <div className="flex flex-col">
         <input
           placeholder="Password"
-          {...register("password", {
-            required: "password cannot be empty",
-            minLength: {
-              value: 8,
-              message: "password must be atleast 8 characters",
-            },
-          })}
+          {...register("password")}
           className="p-2 px-3 w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
           type="password"
           id="password"
@@ -66,11 +81,19 @@ function Login() {
 
       <button
         type="submit"
-        className="bg-black text-white uppercase text-lg p-2 rounded-md"
+        className="bg-black disabled:bg-gray-950 text-white uppercase text-lg p-2 rounded-md"
+        disabled={isSubmitting}
       >
-        login
+        {isSubmitting ? "logging in" : "login"}
       </button>
-      <Link href="/auth/signin/register" className="text-sm font-medium">
+      {errors.root && (
+        <p className="text-red-500 px-2 text-xs">{errors.root.message}</p>
+      )}
+      <Link
+        href="/auth/signin/register"
+        replace={true}
+        className="text-sm font-medium"
+      >
         Don<sup>,</sup>t have an account ?{" "}
         <span className="font-semibold text-lg">Register</span>
       </Link>

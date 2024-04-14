@@ -38,7 +38,7 @@ const navLink: { href: string; linkName: string }[] = [
 ];
 import connectDb from "@/lib/connectDB";
 
-// connectDb();
+connectDb();
 export default async function RootLayout({
   children,
   notemodal,
