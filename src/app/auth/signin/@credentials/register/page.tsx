@@ -32,7 +32,7 @@ type formFields = z.infer<typeof schema>;
 function Login() {
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
     setError,
   } = useForm<formFields>({
@@ -58,6 +58,7 @@ function Login() {
           error.response?.data;
         setError(path, { message });
       } else {
+        console.log(error);
         setError("root", { message: "internal server error" });
       }
     }
@@ -114,9 +115,10 @@ function Login() {
 
       <button
         type="submit"
-        className="bg-black text-white uppercase text-lg p-2 rounded-md"
+        className="bg-black disabled:bg-gray-950 text-white uppercase text-lg p-2 rounded-md"
+        disabled={isSubmitting}
       >
-        register
+        {isSubmitting ? "registering" : "register"}
       </button>
       {errors.root && (
         <p className="text-red-500 px-2 text-xs">{errors.root.message}</p>

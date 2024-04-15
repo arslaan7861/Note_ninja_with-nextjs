@@ -12,36 +12,45 @@ const handler = NextAuth({
         password: { label: "password", type: "password" },
       },
       async authorize(credentials, req) {
-        console.log("logging", credentials);
+        try {
+          console.log("logging", credentials);
 
-        if (!credentials) {
-          throw new Error("provide proper credentials");
-        }
-        const user = await User.findOne({ username: credentials?.username });
+          if (!credentials) {
+            throw new Error("provide proper credentials");
+          }
+          const user = await User.findOne({ username: credentials?.username });
 
-        if (!user) {
-          console.log("user not found");
+          if (!user) {
+            console.log("user not found");
+            const err = JSON.stringify({
+              message: "User not found",
+              path: "username",
+            });
+            throw new Error(err);
+          }
+          console.log("found user");
+          const PasswordMatches = await bcrypt.compare(
+            credentials?.password,
+            user.password
+          );
+          if (!PasswordMatches) {
+            console.log("wrong password");
+            const err = JSON.stringify({
+              message: "Password incorrect",
+              path: "password",
+            });
+            throw new Error(err);
+          }
+          console.log(user);
+          return { username: "sdsdf", password: "sdfsdfdsf", id: "sdas" };
+        } catch (error) {
+          console.log(error);
           const err = JSON.stringify({
-            message: "User not found",
-            path: "username",
+            message: "server error",
+            path: "root",
           });
           throw new Error(err);
         }
-        console.log("found user");
-        const PasswordMatches = await bcrypt.compare(
-          credentials?.password,
-          user.password
-        );
-        if (!PasswordMatches) {
-          console.log("wrong password");
-          const err = JSON.stringify({
-            message: "Password incorrect",
-            path: "password",
-          });
-          throw new Error(err);
-        }
-        console.log(user);
-        return { username: "sdsdf", password: "sdfsdfdsf", id: "sdas" };
       },
     }),
   ],

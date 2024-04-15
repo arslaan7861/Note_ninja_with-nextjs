@@ -18,6 +18,8 @@ export async function POST(req: Request) {
 
     return Response.json({ username: "username" });
   } catch (error: any) {
+    console.log(error);
+
     // if (error instanceof MongooseError) console.log(error?.message, "error my");
     if (error.code === 11000) {
       if (error.keyPattern.email > 0)
