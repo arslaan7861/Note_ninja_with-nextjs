@@ -11,10 +11,10 @@ type userType = {
 
 export async function POST(req: Request) {
   try {
-    const data: userType = await req.json();
-    data.password = await bcrypt.hash(data.password, 10);
-    const user = await User.create(data);
-    return Response.json({ username: user.username });
+    // const data: userType = await req.json();
+    // data.password = await bcrypt.hash(data.password, 10);
+    // const user = await User.create(data);
+    return Response.json({ username: "username" });
   } catch (error: any) {
     // if (error instanceof MongooseError) console.log(error?.message, "error my");
     if (error.code === 11000) {
