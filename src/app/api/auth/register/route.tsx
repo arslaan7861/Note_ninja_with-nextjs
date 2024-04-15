@@ -17,12 +17,10 @@ export async function POST(req: Request) {
     const data: userType = await req.json();
     data.password = await bcrypt.hash(data.password, 10);
     const user = await User.create(data);
-    console.log("registering", data);
 
-    return Response.json({ username: "username" });
+    return Response.json({ username: user.username });
   } catch (error: any) {
     console.log(error);
-
     // if (error instanceof MongooseError) console.log(error?.message, "error my");
     if (error.code === 11000) {
       if (error.keyPattern.email > 0)
@@ -37,6 +35,6 @@ export async function POST(req: Request) {
         );
     }
 
-    return NextResponse.json({ error: "error" });
+    return NextResponse.json({ error: "error while registering" });
   }
 }

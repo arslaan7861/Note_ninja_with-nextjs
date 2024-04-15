@@ -2,8 +2,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 const schema = z.object({
@@ -19,6 +19,9 @@ const schema = z.object({
 type formFields = z.infer<typeof schema>;
 
 function Login() {
+  const searchparams = useSearchParams();
+  const _username = searchparams.get("username");
+  const _message = searchparams.get("message");
   const router = useRouter();
   const {
     register,
@@ -28,6 +31,7 @@ function Login() {
     reset,
   } = useForm<formFields>({
     resolver: zodResolver(schema),
+    defaultValues: { username: _username || "" },
   });
   const submit: SubmitHandler<formFields> = async (data) => {
     try {
@@ -36,8 +40,8 @@ function Login() {
         password: data.password,
         redirect: false,
       });
-      reset({ password: "" });
       if (res?.error) {
+        reset({ password: "" });
         const {
           path,
           message,
@@ -53,7 +57,10 @@ function Login() {
   };
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit(submit)}>
+    <form
+      className="flex flex-col items-center gap-4"
+      onSubmit={handleSubmit(submit)}
+    >
       <div className="flex flex-col w-min ">
         <input
           {...register("username")}
@@ -81,11 +88,16 @@ function Login() {
 
       <button
         type="submit"
-        className="bg-black disabled:bg-gray-950 text-white uppercase text-lg p-2 rounded-md"
+        className="bg-black w-56 disabled:bg-gray-950 text-white uppercase text-lg p-2 rounded-md"
         disabled={isSubmitting}
       >
         {isSubmitting ? "logging in" : "login"}
       </button>
+      {!!_message && (
+        <p className="text-green-500 text-sm capitalize font-thin tracking-wider">
+          {_message} !
+        </p>
+      )}
       {errors.root && (
         <p className="text-red-500 px-2 text-xs">{errors.root.message}</p>
       )}

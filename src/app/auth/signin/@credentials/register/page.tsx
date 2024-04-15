@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -30,6 +31,7 @@ const schema = z
 type formFields = z.infer<typeof schema>;
 
 function Login() {
+  const router = useRouter();
   const {
     register,
     formState: { errors, isSubmitting },
@@ -47,7 +49,9 @@ function Login() {
           headers: { "Content-Type": "application/json" },
         }
       );
-
+      router.replace(
+        `/auth/signin?username=${res?.data.username}&message=registration succesfull please login`
+      );
       console.log(res?.data);
     } catch (error) {
       if (error instanceof AxiosError) {

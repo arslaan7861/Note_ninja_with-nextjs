@@ -13,46 +13,37 @@ const handler = NextAuth({
         password: { label: "password", type: "password" },
       },
       async authorize(credentials, req) {
-        try {
-          console.log("logging", credentials);
-          await connectDB();
+        console.log("logging", credentials);
+        await connectDB();
 
-          if (!credentials) {
-            throw new Error("provide proper credentials");
-          }
-          const user = await User.findOne({ username: credentials?.username });
+        if (!credentials) {
+          throw new Error("provide proper credentials");
+        }
+        const user = await User.findOne({ username: credentials?.username });
 
-          if (!user) {
-            console.log("user not found");
-            const err = JSON.stringify({
-              message: "User not found",
-              path: "username",
-            });
-            throw new Error(err);
-          }
-          console.log("found user");
-          const PasswordMatches = await bcrypt.compare(
-            credentials?.password,
-            user.password
-          );
-          if (!PasswordMatches) {
-            console.log("wrong password");
-            const err = JSON.stringify({
-              message: "Password incorrect",
-              path: "password",
-            });
-            throw new Error(err);
-          }
-          console.log(user);
-          return { username: "sdsdf", password: "sdfsdfdsf", id: "sdas" };
-        } catch (error) {
-          console.log(error);
+        if (!user) {
+          console.log("user not found");
           const err = JSON.stringify({
-            message: "server error",
-            path: "root",
+            message: "User not found",
+            path: "username",
           });
           throw new Error(err);
         }
+        console.log("found user");
+        const PasswordMatches = await bcrypt.compare(
+          credentials?.password,
+          user.password
+        );
+        if (!PasswordMatches) {
+          console.log("wrong password");
+          const err = JSON.stringify({
+            message: "Password incorrect",
+            path: "password",
+          });
+          throw new Error(err);
+        }
+        console.log(user);
+        return user;
       },
     }),
   ],

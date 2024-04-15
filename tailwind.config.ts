@@ -15,6 +15,21 @@ const config: Config = {
         bgm: "url('/images/bgm.jpg')",
         bg: "url('/images/bg.jpg')",
       },
+      colors: {
+        transBlack: "#00000030",
+      },
+      animation: {
+        pop: "pop 2s ease",
+      },
+      keyframes: {
+        pop: {
+          "0%": { opacity: "0", transform: "translateY(2000px)" },
+          "40%": { opacity: "1", transform: "translateY(-20px)" },
+          "60%": { transform: "translateY(10px)" },
+          "80%": { transform: "translateY(0)", opacity: "1" },
+          "100%": { opacity: "0", transform: "translateY(2000px)" },
+        },
+      },
     },
   },
   plugins: [require("tailwind-scrollbar")],
