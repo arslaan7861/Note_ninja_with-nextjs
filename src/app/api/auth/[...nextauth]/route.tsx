@@ -12,6 +12,8 @@ const handler = NextAuth({
         password: { label: "password", type: "password" },
       },
       async authorize(credentials, req) {
+        console.log("logging", credentials);
+
         // if (!credentials) {
         //   throw new Error("provide proper credentials");
         // }
