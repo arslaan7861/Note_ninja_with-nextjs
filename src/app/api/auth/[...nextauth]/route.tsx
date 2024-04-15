@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/lib/userSchema";
 import bcrypt from "bcryptjs";
+import connectDB from "@/lib/connectDB";
 export const dynamic = "force-dynamic";
 const handler = NextAuth({
   providers: [
@@ -14,6 +15,7 @@ const handler = NextAuth({
       async authorize(credentials, req) {
         try {
           console.log("logging", credentials);
+          await connectDB();
 
           if (!credentials) {
             throw new Error("provide proper credentials");

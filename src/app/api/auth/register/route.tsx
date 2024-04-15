@@ -1,3 +1,4 @@
+import connectDB from "@/lib/connectDB";
 import User from "@/lib/userSchema";
 import bcrypt from "bcryptjs";
 import { MongooseError } from "mongoose";
@@ -12,6 +13,7 @@ type userType = {
 export async function POST(req: Request) {
   try {
     console.log("registering");
+    await connectDB();
     const data: userType = await req.json();
     data.password = await bcrypt.hash(data.password, 10);
     const user = await User.create(data);
