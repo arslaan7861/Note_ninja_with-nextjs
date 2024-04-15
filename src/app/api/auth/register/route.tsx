@@ -11,6 +11,7 @@ type userType = {
 
 export async function POST(req: Request) {
   try {
+    console.log("registering");
     const data: userType = await req.json();
     data.password = await bcrypt.hash(data.password, 10);
     const user = await User.create(data);
