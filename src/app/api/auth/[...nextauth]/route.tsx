@@ -1,8 +1,10 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+
 import User from "@/lib/userSchema";
 import bcrypt from "bcryptjs";
 import connectDB from "@/lib/connectDB";
+import GithubProvider from "next-auth/providers/github";
 export const dynamic = "force-dynamic";
 const handler = NextAuth({
   providers: [
@@ -43,6 +45,10 @@ const handler = NextAuth({
         }
         return user;
       },
+    }),
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID as string,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
     }),
   ],
   pages: {

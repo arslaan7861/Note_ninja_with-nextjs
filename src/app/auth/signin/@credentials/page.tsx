@@ -1,4 +1,5 @@
 "use client";
+import Spinner from "@/components/loaders/spinner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
@@ -84,10 +85,10 @@ function Login() {
 
       <button
         type="submit"
-        className="bg-black w-56 disabled:bg-gray-950 text-white uppercase text-lg p-2 rounded-md"
+        className="bg-black flex items-center justify-center w-56 disabled:bg-gray-950 text-white uppercase text-lg p-2 rounded-md"
         disabled={isSubmitting}
       >
-        {isSubmitting ? "logging in" : "login"}
+        {isSubmitting ? <Spinner /> : "login"}
       </button>
       {errors.root && (
         <p className="text-red-500 px-2 text-xs">{errors.root.message}</p>

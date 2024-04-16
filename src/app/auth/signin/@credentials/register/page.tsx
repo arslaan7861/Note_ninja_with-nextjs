@@ -1,4 +1,5 @@
 "use client";
+import Spinner from "@/components/loaders/spinner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { signIn } from "next-auth/react";
@@ -138,7 +139,7 @@ function Login() {
         className="bg-black disabled:bg-gray-950 text-white uppercase text-lg p-2 rounded-md"
         disabled={isSubmitting}
       >
-        {isSubmitting ? "registering" : "register"}
+        {isSubmitting ? <Spinner /> : "register"}
       </button>
       {errors.root && (
         <p className="text-red-500 px-2 text-xs">{errors.root.message}</p>
