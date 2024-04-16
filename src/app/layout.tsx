@@ -37,6 +37,7 @@ const navLink: { href: string; linkName: string }[] = [
   // },
 ];
 import connectDb from "@/lib/connectDB";
+import NextAuthSessionProvider from "@/components/wrapper/authprovider";
 
 connectDb();
 export default async function RootLayout({
@@ -49,13 +50,15 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="h-screen w-screen overflow-y-auto font-para scrollbar-none">
-          <Navbar />
-          <main className="w-screen h-screen flex-grow bg-white">
-            {children}
-            {notemodal}
-          </main>
-        </div>
+        <NextAuthSessionProvider>
+          <div className="h-screen w-screen overflow-y-auto font-para scrollbar-none">
+            <Navbar />
+            <main className="w-screen h-screen flex-grow bg-white">
+              {children}
+              {notemodal}
+            </main>
+          </div>
+        </NextAuthSessionProvider>
       </body>
     </html>
   );
