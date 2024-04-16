@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     data.password = await bcrypt.hash(data.password, 10);
     const user = await User.create(data);
 
-    return Response.json({ username: user.username });
+    return Response.json({ username: user.username, ok: true });
   } catch (error: any) {
     console.log(error);
     // if (error instanceof MongooseError) console.log(error?.message, "error my");

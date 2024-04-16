@@ -13,7 +13,7 @@ const handler = NextAuth({
         password: { label: "password", type: "password" },
       },
       async authorize(credentials, req) {
-        console.log("logging", credentials);
+        console.log("logging");
         await connectDB();
 
         if (!credentials) {
@@ -29,7 +29,6 @@ const handler = NextAuth({
           });
           throw new Error(err);
         }
-        console.log("found user");
         const PasswordMatches = await bcrypt.compare(
           credentials?.password,
           user.password
@@ -42,7 +41,6 @@ const handler = NextAuth({
           });
           throw new Error(err);
         }
-        console.log(user);
         return user;
       },
     }),

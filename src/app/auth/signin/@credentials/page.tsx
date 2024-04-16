@@ -19,9 +19,6 @@ const schema = z.object({
 type formFields = z.infer<typeof schema>;
 
 function Login() {
-  const searchparams = useSearchParams();
-  const _username = searchparams.get("username");
-  const _message = searchparams.get("message");
   const router = useRouter();
   const {
     register,
@@ -31,7 +28,6 @@ function Login() {
     reset,
   } = useForm<formFields>({
     resolver: zodResolver(schema),
-    defaultValues: { username: _username || "" },
   });
   const submit: SubmitHandler<formFields> = async (data) => {
     try {
@@ -93,11 +89,6 @@ function Login() {
       >
         {isSubmitting ? "logging in" : "login"}
       </button>
-      {!!_message && (
-        <p className="text-green-500 text-sm capitalize font-thin tracking-wider">
-          {_message} !
-        </p>
-      )}
       {errors.root && (
         <p className="text-red-500 px-2 text-xs">{errors.root.message}</p>
       )}

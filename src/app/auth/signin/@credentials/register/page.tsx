@@ -1,6 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError, AxiosResponse } from "axios";
+import { signIn } from "next-auth/react";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -36,23 +37,38 @@ function Login() {
     register,
     formState: { errors, isSubmitting },
     handleSubmit,
+    reset,
     setError,
   } = useForm<formFields>({
     resolver: zodResolver(schema),
   });
   const submit: SubmitHandler<formFields> = async (dat) => {
     try {
-      const res: AxiosResponse<any, any> | void = await axios.post(
+      const response: AxiosResponse<any, any> | void = await axios.post(
         "/api/auth/register",
         dat,
         {
           headers: { "Content-Type": "application/json" },
         }
       );
-      router.replace(
-        `/auth/signin?username=${res?.data.username}&message=registration succesfull please login`
-      );
-      console.log(res?.data);
+      if (response?.data.ok) {
+        const res = await signIn("credentials", {
+          username: dat.username,
+          password: dat.password,
+          redirect: false,
+        });
+        if (res?.error) {
+          reset({ password: "" });
+          const {
+            path,
+            message,
+          }: { message: string; path: "username" | "password" } =
+            await JSON.parse(res.error);
+          setError(path, { message });
+          return;
+        }
+        router.replace("/");
+      }
     } catch (error) {
       if (error instanceof AxiosError) {
         const {
