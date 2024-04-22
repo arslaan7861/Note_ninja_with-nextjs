@@ -1,11 +1,16 @@
-"use client";
+import CustomLink from "@/components/navbar/CustomLink";
+import authOptions from "@/lib/Auth/authOPtions";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import React from "react";
 
-function ProfilePage() {
+async function ProfilePage() {
+  const session = await getServerSession(authOptions);
+  const user = session?.user;
   return (
-    <div className="h-screen w-screen flex items-center justify-center ">
-      <Link href={"/api/test"}>home</Link>
+    <div className="h-screen w-screen flex items-center flex-col justify-center ">
+      <p>{JSON.stringify(user)}</p>
+      <CustomLink path="/api/auth/signout">logout</CustomLink>
     </div>
   );
 }

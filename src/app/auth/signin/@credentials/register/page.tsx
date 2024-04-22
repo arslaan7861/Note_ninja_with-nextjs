@@ -11,6 +11,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 const schema = z
   .object({
+    fullname: z
+      .string()
+      .nonempty("please enter fullname")
+      .min(5, "fullname must be 5 letters atleast"),
     username: z
       .string()
       .nonempty("please enter username")
@@ -86,6 +90,18 @@ function Login() {
   };
   return (
     <form className="flex flex-col gap-3" onSubmit={handleSubmit(submit)}>
+      <div className="flex flex-col w-min ">
+        <input
+          {...register("fullname")}
+          type="text"
+          className="p-1 sm:p-2  px-3 w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
+          id="fullname"
+          placeholder="Fullname"
+        />
+        {errors.fullname && (
+          <p className="text-red-500 px-2 text-xs">{errors.fullname.message}</p>
+        )}
+      </div>
       <div className="flex flex-col w-min ">
         <input
           {...register("username")}

@@ -1,6 +1,6 @@
 import ModalWrapper from "@/components/wrapper/ModalWrapper";
 import React from "react";
-import User from "@/lib/userSchema";
+import User from "@/lib/DB/userSchema";
 // import connectDb from "@/lib/connectDB";
 type propsType = {
   params: {

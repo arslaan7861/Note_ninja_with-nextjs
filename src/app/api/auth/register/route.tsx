@@ -1,5 +1,5 @@
-import connectDB from "@/lib/connectDB";
-import User from "@/lib/userSchema";
+import connectDB from "@/lib/DB/connectDB";
+import User from "@/lib/DB/userSchema";
 import bcrypt from "bcryptjs";
 import { MongooseError } from "mongoose";
 import { NextResponse } from "next/server";

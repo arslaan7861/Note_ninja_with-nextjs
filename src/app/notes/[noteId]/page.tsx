@@ -4,7 +4,7 @@ type propsType = {
     noteId: string;
   };
 };
-import User from "@/lib/userSchema";
+import User from "@/lib/DB/userSchema";
 // import connectDb from "@/lib/connectDB";
 
 async function page({ params }: propsType) {

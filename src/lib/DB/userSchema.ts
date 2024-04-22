@@ -13,5 +13,7 @@ const userSchema = new mongoose.Schema({
     unique: [true, "email is already registered with another acccount"],
   },
   uploads: [String],
+  accountProvider: String,
+  image: String,
 });
 export default mongoose.models.users || mongoose.model("users", userSchema);

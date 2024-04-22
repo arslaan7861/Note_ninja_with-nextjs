@@ -10,7 +10,6 @@ function Signin() {
         provider="github"
         redirect
         key={"github"}
-        bg="black"
         imgUrl="/images/github.svg"
       ></Signinbutton>
       <Signinbutton

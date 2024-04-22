@@ -48,6 +48,7 @@ function Login() {
         return;
       }
       router.replace("/");
+      router.refresh();
     } catch (error) {
       setError("root", { message: "something went wrong" });
     }
