@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google-cloud/local-auth": "^3.0.1",
     "@hookform/resolvers": "^3.3.4",
     "axios": "^1.6.8",
     "bcryptjs": "^2.4.3",
     "express": "^4.19.2",
+    "googleapis": "^135.0.0",
     "mongoose": "^8.2.4",
     "next": "14.1.0",
     "next-auth": "^4.24.7",

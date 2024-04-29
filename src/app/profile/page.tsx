@@ -1,4 +1,4 @@
-import CustomLink from "@/components/navbar/CustomLink";
+import CustomLink from "@/components/buttons/CustomLink";
 import authOptions from "@/lib/Auth/authOPtions";
 import { getServerSession } from "next-auth";
 import Link from "next/link";

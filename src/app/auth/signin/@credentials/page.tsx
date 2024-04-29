@@ -21,6 +21,8 @@ type formFields = z.infer<typeof schema>;
 
 function Login() {
   const router = useRouter();
+  const params = useSearchParams();
+  const message = params.get("msg");
   const {
     register,
     formState: { errors, isSubmitting },
@@ -91,8 +93,12 @@ function Login() {
       >
         {isSubmitting ? <Spinner /> : "login"}
       </button>
+
       {errors.root && (
         <p className="text-red-500 px-2 text-xs">{errors.root.message}</p>
+      )}
+      {!errors.root && !!message && (
+        <p className="text-red-500 px-2 text-xs">{message}</p>
       )}
       <Link
         href="/auth/signin/register"
