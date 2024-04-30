@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 function Layout({
   children,
@@ -10,7 +10,7 @@ function Layout({
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center">
       <section className="h-min py-4 md:w-1/3 w-2/3 flex items-center justify-center">
-        {credentials}
+        <Suspense children={credentials} fallback={<></>}></Suspense>
       </section>
       <p className="text-lg gap-1 font-semibold flex items-center w-4/6 md:w-1/2">
         <span className="border border-gray-400 rounded-full h-0 flex-grow"></span>
