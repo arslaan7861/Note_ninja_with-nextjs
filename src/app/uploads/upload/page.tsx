@@ -23,9 +23,9 @@ const schema = z.object({
 type formFields = z.infer<typeof schema>;
 function UploadPage() {
   const [subjects, setSubjects] = useState<subjectType[] | undefined>();
-  const router = useRouter();
-  const params = useSearchParams();
-  const message = params.get("msg");
+  // const router = useRouter();
+  // const params = useSearchParams();
+  // const message = params.get("msg");
   const {
     register,
     formState: { errors, isSubmitting },
@@ -135,9 +135,9 @@ function UploadPage() {
       {errors.root && (
         <p className="text-red-500 px-2 text-xs">{errors.root.message}</p>
       )}
-      {!errors.root && !!message && (
+      {/* {!errors.root && !!message && (
         <p className="text-red-500 px-2 text-xs">{message}</p>
-      )}
+      )} */}
     </form>
   );
 }
