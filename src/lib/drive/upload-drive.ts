@@ -18,13 +18,10 @@ const drive = google.drive({
   auth: oAuthClient,
 });
 
-async function Upload(
-  file: ReadableStream<any>,
-  fileName: string,
-  fileMimeType: string
-) {
+async function Upload(file: string, fileName: string, fileMimeType: string) {
   try {
     // const fileStream = (await file.stream()) as streamType;
+    // const buffer = Buffer.from(file);
 
     // fileStream.pipe = fileStream.pipeTo;
     const res = await drive.files.create({

@@ -1,15 +1,16 @@
 "use client";
 import Spinner from "@/components/loaders/spinner";
 import noteStructure, { subjectType } from "@/lib/noteSchema";
-import test from "@/lib/server-actions/test";
 import uploadNote from "@/lib/server-actions/uploads/upploadNote";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
+
 const schema = z.object({
-  note: z.instanceof(FileList),
+  note: z.any(),
   year: z
     .string()
     .optional()
@@ -57,24 +58,13 @@ function UploadPage() {
     if (data.note[0].size > MAX_UPLOAD_SIZE)
       return setError("note", { message: "maximum size 50mb" });
 
-    // const file = data.note[0];
-    // const { subject, year } = data;
-    // const formData = new FormData();
-    // formData.append("file", file);
-    // formData.append("subject", subject as string);
-    // formData.append("year", year as string);
-    // uploadNote(formData);
-    const fileArray = await data.note[0].arrayBuffer();
-    const file = new Uint8Array(fileArray);
-    // const file = new Blob([fileArray]);
-    // const file = data.note[0]
-    await uploadNote({
-      file: file,
-      year: data.year as string,
-      subject: data.subject as string,
-      fileMimeType: data.note[0].type,
-      fileName: data.note[0].name,
-    });
+    const formData = new FormData();
+    const file: File = data.note[0] as File;
+    formData.append("file", file);
+    formData.append("subject", data.subject as string);
+    formData.append("year", data.year as string);
+    const fileData = await uploadNote(formData);
+    console.log(fileData);
   };
   const year = watch("year") as "first" | "second" | "third" | "fourth";
   useEffect(() => {
