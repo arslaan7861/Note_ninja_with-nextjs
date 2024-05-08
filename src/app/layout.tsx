@@ -9,11 +9,9 @@ import Navbar from "@/components/navbar/Navbar";
 export default async function RootLayout({
   children,
   notemodal,
-  notesection,
 }: {
   children: React.ReactNode;
   notemodal: React.ReactNode;
-  notesection: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -23,10 +21,7 @@ export default async function RootLayout({
             <Navbar />
 
             <main className="w-screen h-screen flex-grow bg-white">
-              <div className="parallax__cont">
-                {children}
-                {notesection}
-              </div>
+              {children}
               {notemodal}
             </main>
           </div>
