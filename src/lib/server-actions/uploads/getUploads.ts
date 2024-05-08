@@ -6,7 +6,6 @@ import type { uploadType } from "@/types/uploads";
 import Uploads from "@/lib/DB/noteSchema";
 async function getUploads() {
   const session = await getServerSession(authOptions);
-
   const user = await User.findOne({ username: session?.user.username });
   const uploads: string[] = user?.uploads;
   if (!uploads) return null;
@@ -17,7 +16,7 @@ async function getUploads() {
     const up = await Uploads.findById(id);
     UserUploads.push(up);
   }
-  return UserUploads;
+  return UserUploads.length !== 0 ? UserUploads : null;
 }
 
 export default getUploads;
