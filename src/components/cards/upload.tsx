@@ -16,7 +16,7 @@ function Upload({ uploadData }: { uploadData: uploadType }) {
         <h3 className="text-ellipsis capitalize text-sm w-full font-semibold  line-clamp-1">
           {uploadData.year} year
         </h3>
-        <h3 className="text-ellipsis capitalize text-xs font-semibold w-full  line-clamp-1">
+        <h3 className="text-ellipsis text-xs font-semibold w-full  line-clamp-1">
           uploaded: {uploadData.uploader}
         </h3>
       </section>

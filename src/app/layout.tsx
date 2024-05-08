@@ -9,12 +9,12 @@ import Navbar from "@/components/navbar/Navbar";
 export default async function RootLayout({
   children,
   notemodal,
+  notesection,
 }: {
   children: React.ReactNode;
   notemodal: React.ReactNode;
+  notesection: React.ReactNode;
 }) {
-  // await connectDb();
-  // await userSchema.deleteMany({});
   return (
     <html lang="en">
       <body>
@@ -23,7 +23,10 @@ export default async function RootLayout({
             <Navbar />
 
             <main className="w-screen h-screen flex-grow bg-white">
-              {children}
+              <div className="parallax__cont">
+                {children}
+                {notesection}
+              </div>
               {notemodal}
             </main>
           </div>
