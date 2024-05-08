@@ -25,10 +25,13 @@ const uploadSchema = new mongoose.Schema({
     type: String,
     required: [true, "please provide year"],
   },
-  comments: {
-    // {comment:St}
-  },
+  comments: [
+    {
+      comment: { type: String, required: [true, "please provide comment"] },
+      commentator: { type: String, required: [true, "please provide comment"] },
+    },
+  ],
 });
 
-module.exports =
-  mongoose.models.uploads || mongoose.model("uploads", uploadSchema);
+export default mongoose.models.uploads ||
+  mongoose.model("uploads", uploadSchema);

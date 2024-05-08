@@ -19,7 +19,7 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         <NextAuthSessionProvider>
-          <div className="h-screen w-screen overflow-y-auto font-para scrollbar-none">
+          <div className="h-screen w-screen overflow-y-auto scrollbar-none">
             <Navbar />
 
             <main className="w-screen h-screen flex-grow bg-white">
