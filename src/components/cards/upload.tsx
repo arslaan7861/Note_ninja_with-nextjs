@@ -4,8 +4,8 @@ import React from "react";
 
 function Upload({ uploadData }: { uploadData: uploadType }) {
   return (
-    <article className=" shrink-0 h-32 text-txtclr relative overflow-hidden z-10 flex items-center gap-2 col-span-1 shadow-lg">
-      <section className="relative border w-24 h-full shrink-0">
+    <article className=" shrink-0 h-32 text-txtclr relative overflow-hidden z-10 flex items-center gap-2 col-span-1 rounded-md shadow-md border border-black ">
+      <section className="relative w-24 h-full shrink-0">
         <Image src={"/images/book.jpg"} fill alt="book cover page" />
       </section>
       <section className="flex-grow flex flex-col py-4 p-2 justify-center gap-2 ">

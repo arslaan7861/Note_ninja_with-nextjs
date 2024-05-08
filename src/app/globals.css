@@ -17,7 +17,7 @@
   }
   /* !NOTES SECTION  */
   .notes__sec {
-    @apply snap-center h-screen relative z-10 w-screen grid grid-cols-1 sm:grid-cols-2 auto-rows-min md:grid-cols-3 lg:grid-cols-4 p-4 gap-4 pb-4 bg-cyan-50 pt-16 overflow-y-auto scrollbar-none;
+    @apply snap-center h-screen relative z-10 w-screen grid grid-cols-1 sm:grid-cols-2 auto-rows-min md:grid-cols-3 lg:grid-cols-4 p-4 gap-4 pb-4 pt-16 overflow-y-auto scrollbar-none;
   }
   .search__bar {
     @apply col-span-1 w-full z-30 sm:col-span-2 md:col-span-3 lg:col-span-4 flex sm:flex-row flex-col gap-4 justify-between items-center sticky top-0  max-h-10;
