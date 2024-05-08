@@ -4,6 +4,7 @@ import noteStructure, { subjectType } from "@/lib/noteSchema";
 import uploadNote from "@/lib/server-actions/uploads/upploadNote";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -23,9 +24,7 @@ const schema = z.object({
 type formFields = z.infer<typeof schema>;
 function UploadPage() {
   const [subjects, setSubjects] = useState<subjectType[] | undefined>();
-  // const router = useRouter();
-  // const params = useSearchParams();
-  // const message = params.get("msg");
+  const router = useRouter();
   const {
     register,
     formState: { errors, isSubmitting },
@@ -37,8 +36,6 @@ function UploadPage() {
     resolver: zodResolver(schema),
   });
   const submit: SubmitHandler<formFields> = async (data) => {
-    console.log("sdas");
-
     //! validate subject
     const validSub = noteStructure[
       data.year as "first" | "second" | "third" | "fourth"
@@ -57,14 +54,20 @@ function UploadPage() {
       return setError("note", { message: "only pdf file are supported" });
     if (data.note[0].size > MAX_UPLOAD_SIZE)
       return setError("note", { message: "maximum size 50mb" });
-
+    // ! UPLOAD NOTE
     const formData = new FormData();
     const file: File = data.note[0] as File;
     formData.append("file", file);
     formData.append("subject", data.subject as string);
     formData.append("year", data.year as string);
-    const fileData = await uploadNote(formData);
-    console.log(fileData);
+    const resp: string | undefined = await uploadNote(formData);
+    if (!resp)
+      return setError("root", {
+        message: "something went wrong please try again later",
+      });
+    const fileData = JSON.parse(resp) as { userID: string; fileId: string };
+    router.replace(`/uploads/${fileData.userID}`);
+    router.refresh();
   };
   const year = watch("year") as "first" | "second" | "third" | "fourth";
   useEffect(() => {

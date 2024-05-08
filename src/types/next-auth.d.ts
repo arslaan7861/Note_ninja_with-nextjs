@@ -13,7 +13,7 @@ declare module "next-auth" {
     picture: string;
   }
   interface Session {
-    user: { username: string; email: string; name: string; image };
+    user: { username: string; email: string; name: string; image; id: string };
   }
   interface Token {
     provider: string;

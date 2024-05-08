@@ -5,6 +5,7 @@ import authOptions from "@/lib/Auth/authOPtions";
 import connectDB from "@/lib/DB/connectDB";
 import User from "@/lib/DB/userSchema";
 import Uploads from "@/lib/DB/noteSchema";
+import { revalidatePath } from "next/cache";
 interface fileDataType {
   webContentLink: string;
   webViewLink: string;
@@ -32,14 +33,12 @@ async function uploadNote(formData: FormData) {
       webContentLink,
       webViewLink,
     });
-    console.log(upload);
     await user.uploads.push(upload._id);
     await user.save();
-    console.log(user);
-
-    // return res.data;
+    return JSON.stringify({ userID: user._id, fileId });
   } catch (error) {
     console.log(error);
+    return undefined;
   }
 }
 

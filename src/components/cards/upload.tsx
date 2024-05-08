@@ -4,11 +4,11 @@ import React from "react";
 
 function Upload({ uploadData }: { uploadData: uploadType }) {
   return (
-    <article className=" shrink-0 h-28 text-txtclr relative overflow-hidden z-10 flex items-center gap-2 col-span-1 shadow-lg">
-      <section className="relative border w-24 h-full">
+    <article className=" shrink-0 h-32 text-txtclr relative overflow-hidden z-10 flex items-center gap-2 col-span-1 shadow-lg">
+      <section className="relative border w-24 h-full shrink-0">
         <Image src={"/images/book.jpg"} fill alt="book cover page" />
       </section>
-      <section className="flex-grow flex flex-col p-2 justify-center gap-2 ">
+      <section className="flex-grow flex flex-col py-4 p-2 justify-center gap-2 ">
         <h2 className="text-base font-extrabold uppercase">unit 1</h2>
         <h3 className="text-ellipsis capitalize text-sm w-full font-semibold  line-clamp-1">
           {uploadData.subject}

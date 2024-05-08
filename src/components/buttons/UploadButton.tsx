@@ -6,7 +6,7 @@ export default function Upload() {
   return (
     <Link
       href="/uploads/upload"
-      className="h-12 absolute w-12 bottom-12 right-12 rounded-full bg-black text-white"
+      className="h-12 absolute w-12 bottom-12 right-12 rounded-full bg-black text-white z-50"
     >
       <Image
         src="/icons/upload.svg"

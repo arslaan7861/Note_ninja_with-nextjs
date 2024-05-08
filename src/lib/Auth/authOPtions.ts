@@ -44,7 +44,6 @@ const authOptions: NextAuthOptions = {
           });
           throw new Error(err);
         }
-        console.log(user);
         return user;
       },
     }),
@@ -101,6 +100,7 @@ const authOptions: NextAuthOptions = {
         email: user?.email,
         name: user.fullname,
         image: user.image,
+        id: user._id,
       };
 
       return session;

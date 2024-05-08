@@ -16,7 +16,15 @@ async function Navbar() {
         {!session && <CustomLink path="/auth/signin">signin</CustomLink>}
         {session && <CustomLink path="/profile">profile</CustomLink>}
         <CustomLink path="/notes">notes</CustomLink>
-         <CustomLink path={session?'/uploads':'/auth/signin?msg=please login first'}>uploads</CustomLink>
+        <CustomLink
+          path={
+            session
+              ? `/uploads/${session.user.id}`
+              : "/auth/signin?msg=please login first"
+          }
+        >
+          uploads
+        </CustomLink>
       </div>
     </nav>
   );

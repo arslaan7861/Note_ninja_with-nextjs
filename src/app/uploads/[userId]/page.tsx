@@ -4,10 +4,15 @@ import getUploads from "@/lib/server-actions/uploads/getUploads";
 import { uploadType } from "@/types/uploads";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+type propsType = {
+  params: {
+    userId: string;
+  };
+};
+export const dynamic = "force-dynamic";
 
-async function Uploads() {
-  // const uploads: uploadType[] | null = [];
-  const uploads: uploadType[] | null = await getUploads();
+async function Uploads({ params }: propsType) {
+  const uploads: uploadType[] | null = await getUploads(params.userId);
 
   return (
     <div className="h-screen w-screen pt-16 flex flex-col ">
@@ -25,11 +30,8 @@ async function Uploads() {
           </span>
         </Link>
       ) : (
-        <section className=" grid grid-cols-1 sm:grid-cols-2 auto-rows-min md:grid-cols-3 lg:grid-cols-4 p-4 gap-4 flex-grow">
-          {uploads?.map((upload) => {
-            return <Upload uploadData={upload} key={upload.fileId} />;
-          })}
-          {uploads?.map((upload) => {
+        <section className=" grid grid-cols-1 sm:grid-cols-2 auto-rows-min md:grid-cols-3 p-4 gap-4 flex-grow">
+          {uploads?.reverse().map((upload) => {
             return <Upload uploadData={upload} key={upload.fileId} />;
           })}
         </section>
