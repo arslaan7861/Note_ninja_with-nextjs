@@ -5,7 +5,6 @@ import authOptions from "@/lib/Auth/authOPtions";
 import connectDB from "@/lib/DB/connectDB";
 import User from "@/lib/DB/userSchema";
 import Uploads from "@/lib/DB/noteSchema";
-import { revalidatePath } from "next/cache";
 interface fileDataType {
   webContentLink: string;
   webViewLink: string;

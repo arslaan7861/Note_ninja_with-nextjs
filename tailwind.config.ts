@@ -17,6 +17,7 @@ const config: Config = {
       },
       colors: {
         transBlack: "#00000030",
+        transBlack2: "#00000080",
       },
       animation: {
         pop: "pop 2s ease",

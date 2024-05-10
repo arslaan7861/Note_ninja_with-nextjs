@@ -3,9 +3,7 @@ import Spinner from "@/components/loaders/spinner";
 import noteStructure, { subjectType } from "@/lib/noteSchema";
 import uploadNote from "@/lib/server-actions/uploads/upploadNote";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { revalidatePath } from "next/cache";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -47,7 +45,7 @@ function UploadPage() {
 
     //! PARSE FILE
     const MAX_UPLOAD_SIZE = 1024 * 1024 * 50; // 3MB
-    const ACCEPTED_FILE_TYPES = ["image/png", "image/jpeg"];
+    const ACCEPTED_FILE_TYPES = ["application/pdf"];
     if (data.note.length === 0)
       return setError("note", { message: "please select a file" });
     if (!ACCEPTED_FILE_TYPES.includes(data.note[0].type))
@@ -89,6 +87,7 @@ function UploadPage() {
           className="file:p-2 file:border-none file:bg-black file:text-white w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
           placeholder="Username"
           multiple={false}
+          accept="application/pdf"
         />
         {errors.note && (
           <p className="text-red-500 px-2 text-xs">{`${errors.note.message}`}</p>

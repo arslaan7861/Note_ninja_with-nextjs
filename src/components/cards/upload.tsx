@@ -1,10 +1,14 @@
 import { uploadType } from "@/types/uploads";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function Upload({ uploadData }: { uploadData: uploadType }) {
   return (
-    <article className=" shrink-0 h-32 text-txtclr relative overflow-hidden z-10 flex items-center gap-2 col-span-1 rounded-md shadow-md border border-black ">
+    <Link
+      href={`/notes/${uploadData._id}`}
+      className=" shrink-0 h-32 text-txtclr relative overflow-hidden z-10 flex items-center gap-2 col-span-1 rounded-md hover:bg-transBlack"
+    >
       <section className="relative w-24 h-full shrink-0">
         <Image src={"/images/book.jpg"} fill alt="book cover page" />
       </section>
@@ -20,7 +24,7 @@ function Upload({ uploadData }: { uploadData: uploadType }) {
           uploaded: {uploadData.uploader}
         </h3>
       </section>
-    </article>
+    </Link>
   );
 }
 
