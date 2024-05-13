@@ -5,7 +5,7 @@ import authOptions from "@/lib/Auth/authOPtions";
 import connectDB from "@/lib/DB/connectDB";
 import User from "@/lib/DB/userSchema";
 import Uploads from "@/lib/DB/noteSchema";
-interface fileDataType {
+export interface fileDataType {
   webContentLink: string;
   webViewLink: string;
   fileId: string;
@@ -15,14 +15,12 @@ async function uploadNote(formData: FormData) {
     const session = await getServerSession(authOptions);
     await connectDB();
     const user = await User.findOne({ username: session?.user.username });
-    const { data: fileData }: { data: fileDataType } = await axios.post(
-      process.env.DRIVE_UPLOAD_URL as string,
-      formData
-    );
+
     const subject = formData.get("subject") as string;
     const year = formData.get("year") as string;
-
-    const { fileId, webContentLink, webViewLink } = fileData;
+    const fileId = formData.get("fileId") as string;
+    const webViewLink = formData.get("webViewLink") as string;
+    const webContentLink = formData.get("webContentLink") as string;
 
     const upload = await Uploads.create({
       year,

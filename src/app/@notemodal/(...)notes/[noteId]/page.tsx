@@ -14,18 +14,18 @@ async function InterceptedNote({ params }: propsType) {
   await connectDB();
   const noteData: uploadType = await noteSchema.findById(params.noteId);
   return (
-    <div className="w-full h-full flex p-4 flex-col items-center justify-center gap-5 font-semibold pt-4">
+    <div className="w-full h-full flex flex-col items-center justify-center gap-5 font-semibold pt-4">
       <section className="relative w-32 h-40">
         <Image src={"/images/book.jpg"} fill alt="book cover page" />
       </section>
       <section className="w-full flex flex-col px-4 justify-evenly gap-2 flex-grow">
         <h2 className="flex justify-between gap-3 capitalize text-ellipsis line-clamp-1">
           <span> unit:</span>
-          <span className="text-ellipsis line-clamp-1"> unit 1</span>
+          <span className="break-all line-clamp-1"> unit 1</span>
         </h2>
         <h3 className="flex justify-between gap-3 capitalize ">
           <span> subject:</span>
-          <span className="text-ellipsis line-clamp-1">
+          <span className=" text-right break-all line-clamp-1">
             {" "}
             {noteData.subject}
           </span>
@@ -41,7 +41,7 @@ async function InterceptedNote({ params }: propsType) {
         <a
           href={noteData.webViewLink}
           target="_blank"
-          className="bg-black self-center text-white px-4 py-2 text-lg text-center uppercase"
+          className="bg-black self-center mt-2 text-white px-4 py-2 text-lg text-center uppercase"
         >
           download
         </a>

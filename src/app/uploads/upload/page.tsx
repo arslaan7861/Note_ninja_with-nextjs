@@ -1,8 +1,11 @@
 "use client";
 import Spinner from "@/components/loaders/spinner";
 import noteStructure, { subjectType } from "@/lib/noteSchema";
-import uploadNote from "@/lib/server-actions/uploads/upploadNote";
+import uploadNote, {
+  fileDataType,
+} from "@/lib/server-actions/uploads/upploadNote";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -34,38 +37,49 @@ function UploadPage() {
     resolver: zodResolver(schema),
   });
   const submit: SubmitHandler<formFields> = async (data) => {
-    //! validate subject
-    const validSub = noteStructure[
-      data.year as "first" | "second" | "third" | "fourth"
-    ].find((sub) => {
-      return sub.code === data.subject?.split(")")[0].split("(")[1];
-    });
-    if (!validSub)
-      return setError("subject", { message: "please select a subject" });
-
-    //! PARSE FILE
-    const MAX_UPLOAD_SIZE = 1024 * 1024 * 50; // 3MB
-    const ACCEPTED_FILE_TYPES = ["application/pdf"];
-    if (data.note.length === 0)
-      return setError("note", { message: "please select a file" });
-    if (!ACCEPTED_FILE_TYPES.includes(data.note[0].type))
-      return setError("note", { message: "only pdf file are supported" });
-    if (data.note[0].size > MAX_UPLOAD_SIZE)
-      return setError("note", { message: "maximum size 50mb" });
-    // ! UPLOAD NOTE
-    const formData = new FormData();
-    const file: File = data.note[0] as File;
-    formData.append("file", file);
-    formData.append("subject", data.subject as string);
-    formData.append("year", data.year as string);
-    const resp: string | undefined = await uploadNote(formData);
-    if (!resp)
-      return setError("root", {
-        message: "something went wrong please try again later",
+    try {
+      //! validate subject
+      const validSub = noteStructure[
+        data.year as "first" | "second" | "third" | "fourth"
+      ].find((sub) => {
+        return sub.code === data.subject?.split(")")[0].split("(")[1];
       });
-    const fileData = JSON.parse(resp) as { userID: string; fileId: string };
-    router.replace(`/uploads/${fileData.userID}`);
-    router.refresh();
+      if (!validSub)
+        return setError("subject", { message: "please select a subject" });
+
+      //! PARSE FILE
+      const MAX_UPLOAD_SIZE = 1024 * 1024 * 50; // 3MB
+      const ACCEPTED_FILE_TYPES = ["application/pdf"];
+      if (data.note.length === 0)
+        return setError("note", { message: "please select a file" });
+      if (!ACCEPTED_FILE_TYPES.includes(data.note[0].type))
+        return setError("note", { message: "only pdf file are supported" });
+      if (data.note[0].size > MAX_UPLOAD_SIZE)
+        return setError("note", { message: "maximum size 50mb" });
+      // ! UPLOAD NOTE
+      const formData = new FormData();
+      const file: File = data.note[0] as File;
+      formData.append("file", file);
+      const { data: fileres }: { data: fileDataType } = await axios.post(
+        "https://drive-upload-api.onrender.com",
+        formData
+      );
+      console.log(fileres);
+      formData.delete("file");
+      formData.set("fileId", fileres.fileId);
+      formData.set("webViewLink", fileres.webViewLink);
+      formData.set("webContentLink", fileres.webContentLink);
+      formData.append("subject", data.subject as string);
+      formData.append("year", data.year as string);
+      const resp: string | undefined = await uploadNote(formData);
+      if (!resp)
+        return setError("root", { message: "seomthing went please try again" });
+      const fileData = JSON.parse(resp) as { userID: string; fileId: string };
+      router.replace(`/uploads/${fileData.userID}`);
+      router.refresh();
+    } catch (error) {
+      setError("root", { message: "seomthing went please try again" });
+    }
   };
   const year = watch("year") as "first" | "second" | "third" | "fourth";
   useEffect(() => {
