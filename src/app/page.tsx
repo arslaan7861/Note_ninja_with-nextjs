@@ -1,10 +1,11 @@
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 import type { uploadType } from "@/types/uploads";
 import Uploads from "@/lib/DB/noteSchema";
 import Upload from "@/components/cards/upload";
+import NotesPage from "@/components/pages/notes";
 async function Page() {
-  const notes: uploadType[] = await Uploads.find({});
+  // const notes: uploadType[] = await Uploads.find({});
   return (
     <div className="parallax__cont">
       <section className="hero__sec">
@@ -28,16 +29,9 @@ async function Page() {
           </section>
         </article>
       </section>
-      <section className="notes__sec">
-        {/* serch bar  */}
-        <section className="search__bar">
-          <input type="text" placeholder="Search....." />
-        </section>
-
-        {notes?.reverse().map((upload) => {
-          return <Upload uploadData={upload} key={upload.fileId} />;
-        })}
-      </section>
+      <Suspense fallback={<>loading</>}>
+        <NotesPage />
+      </Suspense>
     </div>
   );
 }

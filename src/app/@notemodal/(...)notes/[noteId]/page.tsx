@@ -39,7 +39,7 @@ async function InterceptedNote({ params }: propsType) {
           <span className=""> {noteData.uploader}</span>
         </h3>
         <a
-          href={noteData.webViewLink}
+          href={noteData.webContentLink}
           target="_blank"
           className="bg-black self-center mt-2 text-white px-4 py-2 text-lg text-center uppercase"
         >
