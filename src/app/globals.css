@@ -1,9 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 
 @tailwind utilities;
 
 @layer components {
+  p,
+  span {
+    @apply font-primary;
+  }
+  h1 {
+    @apply font-secondary;
+    font-size: 32px;
+  }
+  h2 {
+    @apply font-secondary;
+    font-size: 28px;
+  }
+  h3 {
+    @apply font-secondary;
+    font-size: 24px;
+  }
+  h4 {
+    font-size: 20px;
+    @apply font-secondary;
+  }
+  h5 {
+    @apply font-secondary;
+    font-size: 16px;
+  }
+  h6 {
+    @apply font-secondary;
+    font-size: 12px;
+  }
+
   /* !HERO SEC  */
   .parallax__cont {
     @apply h-screen w-screen overflow-y-auto overflow-x-hidden scrollbar-none snap-y snap-mandatory;

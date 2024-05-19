@@ -2,22 +2,23 @@ import UploadButton from "@/components/buttons/UploadButton";
 import Upload from "@/components/cards/upload";
 import getUploads from "@/lib/server-actions/uploads/getUploads";
 import { uploadType } from "@/types/uploads";
+import { Metadata } from "next";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 type propsType = {
   params: {
     userId: string;
   };
 };
 export const dynamic = "force-dynamic";
-
+export const metadata: Metadata = {
+  title: "UPLOADS",
+};
 async function Uploads({ params }: propsType) {
   const uploads: uploadType[] | null = await getUploads(params.userId);
 
   return (
     <div className="h-screen w-screen pt-16 flex flex-col ">
       <UploadButton></UploadButton>
-      <h3 className="text-center text-xl uppercase font-bold p-2 ">uploads</h3>
       {!uploads ? (
         <Link
           href={"uploads/upload"}

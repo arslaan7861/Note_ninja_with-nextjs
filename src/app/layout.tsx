@@ -20,7 +20,7 @@ export default async function RootLayout({
           <div className="h-screen w-screen overflow-y-auto scrollbar-none">
             <Navbar />
 
-            <main className="w-screen h-screen flex-grow bg-white">
+            <main className="w-screen h-screen flex-grow bg-bg_primary text-text_color">
               {children}
               {notemodal}
             </main>

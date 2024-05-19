@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        primary: ["Roboto", "sans-serif"],
+        secondary: ["Poppins", "sans-serif"],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -16,8 +20,17 @@ const config: Config = {
         bg: "url('/images/bg.jpg')",
       },
       colors: {
-        transBlack: "#00000030",
+        transBlack: "#00000010",
         transBlack2: "#00000080",
+        bg_primary: "#f5f5f5",
+        nav_color: "#1a237e",
+        text_color: "#212121",
+        primary_color: "#000000",
+        secondary_color: "#171717",
+        border_color: "#bdbdbd",
+        card_color: "#eeeeee",
+        secondary_text: "#757575",
+        placeholder_text: "#9e9e9e",
       },
       animation: {
         pop: "pop 2s ease",
