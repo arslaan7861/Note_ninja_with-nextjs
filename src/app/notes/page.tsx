@@ -1,25 +1,13 @@
-import { getSession } from "next-auth/react";
-import Link from "next/link";
-import React from "react";
-const notes = ["note1", "note2", "note3", "note4", "note5", "note6", "note7"];
-async function Note() {
-  const sess = await getSession();
-  console.log(sess);
+import NotesPage from "@/components/pages/notes";
 
+import React, { Suspense } from "react";
+async function Note() {
   return (
-    <>
-      {notes.map((note) => {
-        return (
-          <Link
-            className="bg-black px-4 py-2 text-white"
-            href={`notes/${note}`}
-            key={note}
-          >
-            {note}
-          </Link>
-        );
-      })}
-    </>
+    <div className=" snap-center h-max relative z-10 w-full grid grid-cols-1 sm:grid-cols-2 auto-rows-min md:grid-cols-3 lg:grid-cols-4 pt-4 gap-4 px-0">
+      <Suspense fallback={<>loading</>}>
+        <NotesPage />
+      </Suspense>
+    </div>
   );
 }
 

@@ -22,7 +22,7 @@ const config: Config = {
       colors: {
         transBlack: "#00000010",
         transBlack2: "#00000080",
-        bg_primary: "#f5f5f5",
+        bg_primary: "#fafafa",
         nav_color: "#1a237e",
         text_color: "#212121",
         primary_color: "#000000",

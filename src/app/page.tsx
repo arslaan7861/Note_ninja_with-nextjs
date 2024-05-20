@@ -29,9 +29,15 @@ async function Page() {
           </section>
         </article>
       </section>
-      <Suspense fallback={<>loading</>}>
-        <NotesPage />
-      </Suspense>
+      <section className="notes__sec">
+        {/* serch bar  */}
+        <section className="search__bar">
+          <input type="text" placeholder="Search....." />
+        </section>
+        <Suspense fallback={<>loading</>}>
+          <NotesPage />
+        </Suspense>
+      </section>
     </div>
   );
 }
