@@ -7,7 +7,7 @@ function Upload({ uploadData }: { uploadData: uploadType }) {
   return (
     <Link
       href={`/notes/${uploadData._id}`}
-      className=" shrink-0 h-32 text-txtclr relative overflow-hidden z-10 flex items-center gap-2 col-span-1 rounded-md hover:bg-transBlack bg-card_color text-text_color shadow-md"
+      className="card shrink-0 h-32 text-txtclr relative overflow-hidden z-10 flex items-center gap-2 col-span-1 rounded-md hover:bg-transBlack bg-card_color text-text_color shadow-md"
     >
       <section className="relative w-24 h-full shrink-0">
         <Image src={"/images/book.jpg"} fill alt="book cover page" />

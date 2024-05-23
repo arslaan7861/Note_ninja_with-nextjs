@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      gridTemplateRows: {
+        md: "auto 1fr",
+        sm: "auto auto auto",
+      },
       fontFamily: {
         primary: ["Roboto", "sans-serif"],
         secondary: ["Poppins", "sans-serif"],
@@ -24,6 +28,7 @@ const config: Config = {
         transBlack2: "#00000080",
         bg_primary: "#fafafa",
         nav_color: "#1a237e",
+        contatiner_color: "#9a9a9a",
         text_color: "#212121",
         primary_color: "#000000",
         secondary_color: "#171717",
