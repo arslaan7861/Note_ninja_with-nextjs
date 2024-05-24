@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /secret-page
+
+# Host
+Host: note-ninjaa.vercel.app
+
+# Sitemaps
+Sitemap: note-ninjaa.vercel.app/sitemap.xml
