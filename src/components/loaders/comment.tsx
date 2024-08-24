@@ -5,7 +5,7 @@ function CommentSkeletons() {
     <>
       <CommentSkeleton />
       <CommentSkeleton />
-      <CommentSkeleton />
+      <CommentSkeleton /><CommentSkeleton /><CommentSkeleton />
       <CommentSkeleton />
     </>
   );

@@ -1,8 +1,9 @@
+import Comments from "@/components/cards/comment";
 import CommentForm from "@/components/cards/commentForm";
 import CommentSkeletons from "@/components/loaders/comment";
 import NotesPage from "@/components/pages/notes";
 import { Metadata } from "next";
-import React from "react";
+import React, { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "VIEWING NOTE",
@@ -13,6 +14,7 @@ function Layout({
   params,
 }: {
   children: React.ReactNode;
+  replypanel: React.ReactNode;
   params: {
     noteId: string;
   };
@@ -30,7 +32,10 @@ function Layout({
         <h4 className="px-2capitalize font-semibold w-full">Comments</h4>
         <CommentForm noteId={params.noteId} />
         <article className="h-min w-full border border-border_color bg-white rounded-md md:flex-grow overflow-auto flex flex-col items-center gap-4 p-4">
-          <CommentSkeletons />
+          <Suspense
+            children={<Comments id={params.noteId} />}
+            fallback={<CommentSkeletons />}
+          ></Suspense>
         </article>
       </section>
     </div>

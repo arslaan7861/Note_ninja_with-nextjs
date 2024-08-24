@@ -16,7 +16,7 @@ async function page({ params }: propsType) {
   const note: uploadType = await noteSchema.findById(params.noteId);
 
   return (
-    <main className="h-min pt-4 sm:pt-0 md:h-72 bg-card_color  relative overflow-hidden z-10 text-text_color flex-col sm:flex-row flex items-center gap-2 col-span-3 row-span-1 rounded-md hover:bg-transBlack shadow-md">
+    <main className="h-min border border-red-100 pt-4 sm:pt-0 md:h-72 bg-card_color  relative overflow-hidden z-10 text-text_color flex-col sm:flex-row flex items-center gap-2 col-span-3 row-span-1 rounded-md hover:bg-transBlack shadow-md">
       <section className="relative md:h-full h-56 aspect-[2/3] shrink-0">
         <Image src={"/images/book.jpg"} fill alt="book cover page" />
       </section>

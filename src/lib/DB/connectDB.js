@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
-// const uri = process.env.MONGO_URI;
-const uri =
-  "mongodb+srv://friendscircle7861:connectdb7861@cluster0.tgqht9x.mongodb.net/NOTES?retryWrites=true&w=majority&appName=Cluster0";
+const uri = process.env.MONGO_URI;
 
 function connectDB() {
   try {
+
     mongoose.connect(uri);
     console.log("connected to database");
   } catch (error) {
