@@ -32,10 +32,9 @@ function Layout({
         <h4 className="px-2capitalize font-semibold w-full">Comments</h4>
         <CommentForm noteId={params.noteId} />
         <article className="h-min w-full border border-border_color bg-white rounded-md md:flex-grow overflow-auto flex flex-col items-center gap-4 p-4">
-          <Suspense
-            children={<Comments id={params.noteId} />}
-            fallback={<CommentSkeletons />}
-          ></Suspense>
+          <Suspense fallback={<CommentSkeletons />}>
+            <Comments id={params.noteId} />
+          </Suspense>
         </article>
       </section>
     </div>
