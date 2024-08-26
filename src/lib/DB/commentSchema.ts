@@ -6,8 +6,12 @@ const commentSchema = new mongoose.Schema({
   comments: [
     {
       comment: { type: String, required: [true, "please provide comment"] },
-      commentator: { type: String, required: [true, "please provide comment username"] },
+      commentator: {
+        type: String,
+        required: [true, "please provide comment username"],
+      },
       likes: { type: Number, default: 0 },
+      dislikes: { type: Number, default: 0 },
       repliesId: String,
     },
   ],

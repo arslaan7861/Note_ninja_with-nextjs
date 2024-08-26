@@ -1,5 +1,5 @@
-import Comments from "@/components/cards/comment";
-import CommentForm from "@/components/cards/commentForm";
+import Comments from "@/components/comments/comment";
+import CommentForm from "@/components/forms/commentForm";
 import CommentSkeletons from "@/components/loaders/comment";
 import NotesPage from "@/components/pages/notes";
 import { Metadata } from "next";

@@ -25,7 +25,7 @@ const config: Config = {
       },
       colors: {
         transBlack: "#00000010",
-        transBlack2: "#00000080",
+        transBlack2: "#000000aa",
         bg_primary: "#fafafa",
         nav_color: "#1a237e",
         contatiner_color: "#9a9a9a",

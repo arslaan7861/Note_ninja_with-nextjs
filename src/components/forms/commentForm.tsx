@@ -1,8 +1,6 @@
 "use client";
-import { UnauthenticatedError } from "@/lib/errors/auth";
 import { postComment } from "@/lib/server-actions/postComment";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -25,33 +23,35 @@ function CommentForm({ noteId }: { noteId: string }) {
   });
   //!CREATE ROUTER
   const router = useRouter();
-  //!GET USER SESSION
-  const { data: session, status } = useSession();
   const submit: SubmitHandler<commentFields> = async (data) => {
     try {
-      const resp: string = (await postComment({
-        comment: data.comment,
-        noteId,
-      })) as string;
-      if (!resp) setError("comment", { message: "somenthing went wrong" });
-      console.log(JSON.parse(resp));
+      const resp: { status: number; msg: string } = JSON.parse(
+        (await postComment({
+          comment: data.comment,
+          noteId,
+        })) as string
+      );
+      if (!resp) throw new Error();
+      if (resp.status == 401) router.push("/auth/signin");
+      if (resp.status == 201) router.refresh();
+      reset({ comment: "" });
     } catch (error) {
-      if (error instanceof UnauthenticatedError) router.push("/auth/signin");
+      setError("comment", { message: "somenthing went wrong" });
     }
   };
   return (
     <>
       <form
         onSubmit={handleSubmit(submit)}
-        className="w-full flex h-min items-center"
+        className="w-full flex h-min items-center gap-2"
       >
         <input
           {...register("comment")}
-          className="border h-max w-full shadow-md p-2 flex-grow rounded-l-full border-primary_color"
+          className="h-max w-full p-2 bg-gray-300 flex-grow rounded-lg outline-none"
         />
         <button
           type="submit"
-          className="bg-primary_color hover:bg-secondary_color text-white px-4 py-2 text-base text-center uppercase font-secondar w-full sm:w-min rounded-r-full border border-primary_color"
+          className="bg-primary_color hover:bg-secondary_color text-white sm:w-min p-2 px-4 text-base text-center uppercase font-secondar rounded-lg border border-primary_color flex-grow-0"
         >
           comment
         </button>

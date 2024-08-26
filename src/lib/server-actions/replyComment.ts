@@ -6,35 +6,28 @@ import { UnauthenticatedError } from "../errors/auth";
 
 interface propsType {
   comment: string;
-  noteId: string;
+  repliesId: string;
 }
-export async function postComment({ comment, noteId }: propsType) {
+export async function replyComment({ comment, repliesId }: propsType) {
   try {
     //!CHEACK USER STATUS
     const session = await getServerSession(authOptions);
     if (!session) throw new UnauthenticatedError("login first");
-    //*CREATE COMMENT
 
     // *GET OR CREATE A NEW COMMENTS OBJECT
-    const commentObj =
-      (await commentSchema.findOne({ noteId })) ||
-      (await commentSchema.create({ noteId, comments: [] }));
-    //*INSERT NEW COMMENT
-    const { _id: repliesId } = await commentSchema.create({
-      noteId,
-      comments: [{ comment, commentator: session.user.username }],
-    });
+    const commentObj = await commentSchema.findById(repliesId);
+    //*CREATE COMMENT
     const obj = {
       comment,
       commentator: session.user.username,
       likes: 0,
       dislikes: 0,
-      repliesId,
     };
+    //*INSERT COMMENT
     await commentObj.comments.push(obj);
     await commentObj.save();
     //*RETURN SUCCESS MESSAGE
-    return JSON.stringify({ status: 201, msg: "commented successfull" });
+    return JSON.stringify({ status: 201, msg: "commented successfully" });
   } catch (error) {
     if (error instanceof UnauthenticatedError)
       return JSON.stringify({ status: 401, msg: "login first" });

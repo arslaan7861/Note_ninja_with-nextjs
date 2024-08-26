@@ -7,3 +7,11 @@ export interface uploadType {
   webViewLink: string;
   _id: string;
 }
+export interface commentType {
+  comment: string;
+  commentator: string;
+  likes: number;
+  dislikes: number;
+  repliesId: string;
+  _id: string;
+}
