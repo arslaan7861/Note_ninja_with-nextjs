@@ -14,7 +14,6 @@ function Layout({
   params,
 }: {
   children: React.ReactNode;
-  replypanel: React.ReactNode;
   params: {
     noteId: string;
   };
