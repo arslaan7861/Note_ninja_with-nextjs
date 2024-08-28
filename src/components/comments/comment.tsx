@@ -4,7 +4,7 @@ import Link from "next/link";
 import commentSchema from "@/lib/DB/commentSchema";
 import { commentType } from "@/types/uploads";
 import { comment } from "postcss";
-import { dislike, like } from "@/lib/server-actions/commetLike";
+import { dislike, like } from "@/lib/server-actions/comments/commetLike";
 
 async function Comments({ id }: { id: string }) {
   console.log({ id });

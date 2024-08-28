@@ -1,5 +1,5 @@
 import { DislikeButton, LikeButton } from "@/components/buttons/LikeDislike";
-import { dislike, like } from "@/lib/server-actions/commetLike";
+import { dislike, like } from "@/lib/server-actions/comments/commetLike";
 import { commentType } from "@/types/uploads";
 import React from "react";
 

@@ -3,10 +3,8 @@ import SmallreplyCard from "@/components/comments/replies/SmallreplyCard";
 import Overlay from "@/components/wrapper/overlay";
 import commentSchema from "@/lib/DB/commentSchema";
 import { commentType } from "@/types/uploads";
-import { Metadata } from "next";
 import React from "react";
-import Reply from "@/components/comments/replies/reply";
-import ReplyForm from "@/components/forms/ReplyForm";
+import RepliesList from "@/components/comments/replies/RepliesList";
 interface propsType {
   params: {
     replyId: string;
@@ -14,7 +12,6 @@ interface propsType {
   };
 }
 async function Replies({ params }: propsType) {
-  console.log(params);
   const {
     comments: replies,
   }: {
@@ -27,36 +24,13 @@ async function Replies({ params }: propsType) {
     <Overlay>
       <>
         <BigReplycard>
-          <RepliesList replies={replies} params={params} />
+          <RepliesList replyId={params.replyId} noteId={params.noteId} />
         </BigReplycard>
         <SmallreplyCard>
-          <RepliesList replies={replies} params={params} />
+          <RepliesList replyId={params.replyId} noteId={params.noteId} />
         </SmallreplyCard>
       </>
     </Overlay>
   );
 }
-
-const RepliesList = ({
-  params,
-  replies,
-}: {
-  replies: commentType[];
-  params: {
-    replyId: string;
-    noteId: string;
-  };
-}) => {
-  return (
-    <>
-      <section className="w-full flex-grow px-2 flex flex-col  overflow-y-auto gap-4 custom_scrollbar">
-        {replies.reverse().map((comment) => {
-          return <Reply key={comment._id} commentObj={comment} />;
-        })}
-      </section>
-      <ReplyForm repliesId={params.replyId} noteId={params.noteId} />
-    </>
-  );
-};
-
 export default Replies;

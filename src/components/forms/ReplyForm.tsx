@@ -1,5 +1,5 @@
 "use client";
-import { replyComment } from "@/lib/server-actions/replyComment";
+import { replyComment } from "@/lib/server-actions/comments/replyComment";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -13,9 +13,11 @@ type commentFields = z.infer<typeof schema>;
 function ReplyForm({
   repliesId,
   noteId,
+  fetch,
 }: {
   repliesId: string;
   noteId: string;
+  fetch: () => Promise<void>;
 }) {
   const {
     register,
@@ -39,12 +41,10 @@ function ReplyForm({
       if (!resp) throw new Error();
       if (resp.status == 401) router.push("/auth/signin");
       //!look for a way to revalidate data of current page
-      if (resp.status == 201) {
-        router.replace(`/notes/${noteId}/reply/${repliesId}`);
-        router.refresh();
-      }
+      if (resp.status == 201) fetch();
       reset({ comment: "" });
     } catch (error) {
+      console.log(error);
       setError("comment", { message: "somenthing went wrong" });
     }
   };

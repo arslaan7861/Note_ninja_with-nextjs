@@ -1,9 +1,8 @@
 "use server";
-import commentSchema from "../DB/commentSchema";
-import authOptions from "../Auth/authOPtions";
+import authOptions from "@/lib/Auth/authOPtions";
+import commentSchema from "@/lib/DB/commentSchema";
+import { UnauthenticatedError } from "@/lib/errors/auth";
 import { getServerSession } from "next-auth";
-import { UnauthenticatedError } from "../errors/auth";
-
 interface propsType {
   comment: string;
   repliesId: string;

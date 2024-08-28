@@ -1,5 +1,5 @@
 "use client";
-import { postComment } from "@/lib/server-actions/postComment";
+import { postComment } from "@/lib/server-actions/comments/postComment";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import React from "react";
