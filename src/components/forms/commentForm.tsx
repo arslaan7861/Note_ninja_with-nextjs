@@ -51,9 +51,9 @@ function CommentForm({ noteId }: { noteId: string }) {
         />
         <button
           type="submit"
-          className="bg-primary_color hover:bg-secondary_color text-white sm:w-min p-2 px-4 text-base text-center uppercase font-secondar rounded-lg border border-primary_color flex-grow-0"
+          className="bg-primary_color hover:bg-secondary_color text-white sm:w-min p-2 px-4 text-base text-center uppercase font-secondar rounded-lg border border-primary_color flex-grow-0 disabled:bg-secondary_color"
         >
-          comment
+          {isSubmitting ? "commenting" : "comment"}
         </button>
       </form>
       {errors.comment && (

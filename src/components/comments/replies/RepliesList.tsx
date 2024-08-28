@@ -28,7 +28,7 @@ const RepliesList = ({
     );
   });
   const [replies, setReplies] = useState<commentType[] | null>(null);
-  // const scrollPointer = useRef<HTMLSpanElement | null>(null);
+  const repliesContaner = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     fetch();
   }, []);
@@ -37,9 +37,14 @@ const RepliesList = ({
       const replies: commentType[] =
         JSON.parse((await fetchReplies(replyId)) as string) ||
         ([] as commentType[]);
-
       setReplies(replies);
-      // scrollPointer.current?.scrollIntoView();
+      setTimeout(() => {
+        if (repliesContaner.current)
+          repliesContaner.current.lastElementChild?.scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+          });
+      }, 200);
     } catch (error) {
       console.log("error");
     }
@@ -47,14 +52,16 @@ const RepliesList = ({
   return (
     <>
       <Suspense fallback={<Spinner />}>
-        <section className="w-full flex-grow px-2 flex flex-col items-center justify-center overflow-y-auto gap-4 custom_scrollbar pt-2">
-          {!replies && <Spinner />}
+        <section
+          ref={repliesContaner}
+          className="w-full flex-grow px-2 flex flex-col items-center overflow-y-auto gap-4 custom_scrollbar border border-red-700 scroll-smooth"
+        >
+          {/* {!replies && <Spinner />} */}
           {replies &&
             replies.reverse().map((comment) => {
               return <Reply key={comment._id} commentObj={comment} />;
             })}
         </section>
-        {/* <span ref={scrollPointer}></span> */}
       </Suspense>
       <ReplyForm fetch={fetch} repliesId={replyId} noteId={noteId} />
     </>

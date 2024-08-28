@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
+import Spinner from "../loaders/spinner";
 
 const schema = z.object({
   comment: z.string().nonempty("Please enter your comment"),
@@ -69,10 +70,11 @@ function ReplyForm({
           className="h-max w-full p-2 bg-gray-300 flex-grow rounded-lg outline-none"
         />
         <button
+          disabled={isSubmitting}
           type="submit"
-          className="bg-primary_color hover:bg-secondary_color text-white sm:w-min p-2 px-4 text-base text-center uppercase font-secondar rounded-lg border border-primary_color flex-grow-0"
+          className="bg-primary_color hover:bg-secondary_color text-white sm:w-min p-2 px-4 text-base text-center uppercase font-secondar rounded-lg border border-primary_color flex-grow-0 disabled:bg-secondary_color"
         >
-          reply
+          {isSubmitting ? "repling" : "reply"}
         </button>
       </form>
     </>
