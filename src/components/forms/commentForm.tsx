@@ -47,7 +47,8 @@ function CommentForm({ noteId }: { noteId: string }) {
       >
         <input
           {...register("comment")}
-          className="h-max w-full p-2 bg-gray-300 flex-grow rounded-lg outline-none"
+          placeholder="comment..."
+          className="h-max w-full p-2 placeholder:text-secondary_text bg-gray-300 flex-grow rounded-lg outline-none"
         />
         <button
           type="submit"

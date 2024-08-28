@@ -54,11 +54,11 @@ const RepliesList = ({
       <Suspense fallback={<Spinner />}>
         <section
           ref={repliesContaner}
-          className="w-full flex-grow px-2 flex flex-col items-center overflow-y-auto gap-4 custom_scrollbar border border-red-700 scroll-smooth"
+          className="w-full flex-grow px-2 flex flex-col items-center overflow-y-auto gap-4 custom_scrollbar scroll-smooth"
         >
           {/* {!replies && <Spinner />} */}
           {replies &&
-            replies.reverse().map((comment) => {
+            replies.map((comment) => {
               return <Reply key={comment._id} commentObj={comment} />;
             })}
         </section>
