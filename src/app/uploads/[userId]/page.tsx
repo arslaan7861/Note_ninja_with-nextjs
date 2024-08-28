@@ -17,7 +17,7 @@ async function Uploads({ params }: propsType) {
   const uploads: uploadType[] | null = await getUploads(params.userId);
 
   return (
-    <div className="h-screen w-screen pt-16 flex flex-col ">
+    <div className="h-svh w-screen pt-16 flex flex-col ">
       <UploadButton></UploadButton>
       {!uploads ? (
         <Link

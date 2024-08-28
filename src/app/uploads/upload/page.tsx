@@ -90,7 +90,7 @@ function UploadPage() {
 
   return (
     <form
-      className="flex flex-col w-screen h-screen justify-center items-center gap-4"
+      className="flex flex-col w-screen h-svh justify-center items-center gap-4"
       onSubmit={handleSubmit(submit)}
     >
       <div className="flex flex-col w-min ">

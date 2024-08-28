@@ -8,7 +8,7 @@ async function ProfilePage() {
   const session = await getServerSession(authOptions);
   const user = session?.user;
   return (
-    <div className="h-screen w-screen flex items-center flex-col justify-center ">
+    <div className="h-svh w-screen flex items-center flex-col justify-center ">
       <p>{JSON.stringify(user)}</p>
       <CustomLink path="/api/auth/signout">logout</CustomLink>
     </div>

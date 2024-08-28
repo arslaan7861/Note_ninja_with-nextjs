@@ -37,18 +37,18 @@
 
   /* !HERO SEC  */
   .parallax__cont {
-    @apply h-screen w-screen overflow-y-auto overflow-x-hidden scrollbar-none snap-y snap-mandatory;
+    @apply h-svh w-screen overflow-y-auto overflow-x-hidden scrollbar-none snap-y snap-mandatory;
     perspective: 10px;
   }
   .hero__sec {
-    @apply snap-center -z-20 h-screen w-full items-center bg-bgm md:bg-bg bg-bottom sm:bg-left-top bg-cover;
+    @apply snap-center -z-20 h-svh w-full items-center bg-bgm md:bg-bg bg-bottom sm:bg-left-top bg-cover;
     transform-style: preserve-3d;
     transform: translateZ(-5px) scale(1.5);
     /* z-index: -1; */
   }
   /* !NOTES SECTION  */
   .notes__sec {
-    @apply snap-center h-screen w-screen relative z-10 grid grid-cols-1 sm:grid-cols-2 auto-rows-max md:grid-cols-3 lg:grid-cols-4 p-4 gap-4 pb-4 bg-white pt-16 overflow-y-auto scrollbar-none;
+    @apply snap-center h-svh w-screen relative z-10 grid grid-cols-1 sm:grid-cols-2 auto-rows-max md:grid-cols-3 lg:grid-cols-4 p-4 gap-4 pb-4 bg-white pt-16 overflow-y-auto scrollbar-none;
   }
   .search__bar {
     @apply col-span-1 w-full z-30 sm:col-span-2 md:col-span-3 lg:col-span-4 flex sm:flex-row flex-col gap-4 justify-between items-center sticky top-0  max-h-10;

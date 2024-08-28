@@ -8,7 +8,7 @@ function Layout({
   credentials: React.ReactNode;
 }) {
   return (
-    <div className="h-screen w-screen flex flex-col items-center justify-center">
+    <div className="h-svh w-screen flex flex-col items-center justify-center">
       <section className="h-min py-4 md:w-1/3 w-2/3 flex items-center justify-center">
         <Suspense fallback={<></>}>{credentials}</Suspense>
       </section>

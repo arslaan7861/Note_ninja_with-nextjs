@@ -17,10 +17,10 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         <NextAuthSessionProvider>
-          <div className="h-screen w-screen overflow-y-auto scrollbar-none">
+          <div className="h-svh w-screen overflow-y-auto scrollbar-none">
             <Navbar />
 
-            <main className="w-screen h-screen bg-bg_primary text-text_color">
+            <main className="w-screen h-svh bg-bg_primary text-text_color">
               {children}
               {notemodal}
             </main>
