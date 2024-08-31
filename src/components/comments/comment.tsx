@@ -1,10 +1,7 @@
-import Image from "next/image";
-import { DislikeButton, LikeButton } from "../buttons/LikeDislike";
+import { DislikeButton, LikeButton } from "../buttons/commetLike";
 import Link from "next/link";
 import commentSchema from "@/lib/DB/commentSchema";
 import { commentType } from "@/types/uploads";
-import { comment } from "postcss";
-import { dislike, like } from "@/lib/server-actions/comments/commetLike";
 
 async function Comments({ id }: { id: string }) {
   console.log({ id });
@@ -28,7 +25,6 @@ async function Comments({ id }: { id: string }) {
   );
 }
 
-console.log(comment);
 export function Comment({
   commentObj,
   noteId,
@@ -36,7 +32,7 @@ export function Comment({
   commentObj: commentType;
   noteId: string;
 }) {
-  const { comment, commentator, dislikes, likes, repliesId } = commentObj;
+  const { comment, commentator, dislikes, likes, repliesId, _id } = commentObj;
 
   return (
     <div className="w-full h-min shadow-md rounded-md flex p-3 gap-3 bg-card_color">
@@ -52,8 +48,18 @@ export function Comment({
           {comment}
         </p>
         <footer className="w-full h-5 sm:h-6 flex items-center gap-4">
-          <LikeButton fn={like} />
-          <DislikeButton fn={dislike} />
+          <LikeButton
+            likesCount={likes.length}
+            liked
+            noteId={noteId}
+            commentId={_id.toString()}
+          />
+          <DislikeButton
+            noteId={noteId}
+            dislikesCount={dislikes.length}
+            disliked
+            commentId={_id.toString()}
+          />
           <Link
             href={`/notes/${noteId}/reply/${repliesId}`}
             className="text-blue-600 text-xs sm:text-sm font-bold"

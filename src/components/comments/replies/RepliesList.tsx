@@ -60,6 +60,7 @@ const RepliesList = ({
           replies.map((comment) => {
             return <Reply key={comment._id} commentObj={comment} />;
           })}
+        <span></span>
       </section>
       <ReplyForm fetch={fetch} repliesId={replyId} noteId={noteId} />
     </>

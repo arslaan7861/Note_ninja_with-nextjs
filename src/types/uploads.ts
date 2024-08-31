@@ -10,8 +10,8 @@ export interface uploadType {
 export interface commentType {
   comment: string;
   commentator: string;
-  likes: number;
-  dislikes: number;
+  likes: string[];
+  dislikes: string[];
   repliesId: string;
   _id: string;
 }

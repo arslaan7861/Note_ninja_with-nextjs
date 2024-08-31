@@ -28,8 +28,6 @@ export async function postComment({ comment, noteId }: propsType) {
     const obj = {
       comment,
       commentator: session.user.username,
-      likes: 0,
-      dislikes: 0,
       repliesId,
     };
     await commentObj.comments.push(obj);
