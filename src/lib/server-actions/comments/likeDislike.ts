@@ -20,19 +20,25 @@ export async function like({ noteId, commentId }: propsType) {
     const likesarr: string[] = await commentObj.comments.id(commentId).likes;
     //*CHECK IF ALDEADY LIKES BY THIS USER
     const liked = likesarr.includes(username);
+    const resp = { status: 201, liked: true };
     //* IF NOT LIKED ADD USER TO LIKED ARRAY
-    if (!liked) commentObj.comments.id(commentId).likes.push(username);
+    if (!liked) {
+      commentObj.comments.id(commentId).likes.push(username);
+    }
     //*ELSE REMOVE USER FROM LIKED ARRAY
-    else
+    else {
       commentObj.comments.id(commentId).likes = await likesarr.filter(
         (user) => user !== username
       );
+      resp.liked = false;
+    }
     console.log({ likes: commentObj.comments.id(commentId).likes });
     //* SAVE CHANGES
     await commentObj.save();
+    return JSON.stringify(resp);
   } catch (error) {
     if (error instanceof UnauthenticatedError)
-      return JSON.stringify({ status: 401, msg: "login first" });
+      return JSON.stringify({ status: 401, liked: false });
   }
 }
 
@@ -49,19 +55,24 @@ export async function disLike({ noteId, commentId }: propsType) {
     const dislikesarr: string[] = await commentObj.comments.id(commentId)
       .dislikes;
     //*CHECK IF ALDEADY dislikes BY THIS USER
-    const liked = dislikesarr.includes(username);
-    //* IF NOT LIKED ADD USER TO LIKED ARRAY
-    if (!liked) commentObj.comments.id(commentId).dislikes.push(username);
-    //*ELSE REMOVE USER FROM LIKED ARRAY
-    else
+    const disliked = dislikesarr.includes(username);
+    const resp = { status: 201, disliked: true };
+    //* IF NOT DISLIKED ADD USER TO LIKED ARRAY
+    if (!disliked) {
+      commentObj.comments.id(commentId).dislikes.push(username);
+    } else {
+      //*ELSE REMOVE USER FROM LIKED ARRAY
       commentObj.comments.id(commentId).dislikes = await dislikesarr.filter(
         (user) => user !== username
       );
+      resp.disliked = false;
+    }
     console.log({ dislikes: commentObj.comments.id(commentId).dislikes });
     //* SAVE CHANGES
     await commentObj.save();
+    return JSON.stringify(resp);
   } catch (error) {
     if (error instanceof UnauthenticatedError)
-      return JSON.stringify({ status: 401, msg: "login first" });
+      return JSON.stringify({ status: 401, disliked: false });
   }
 }

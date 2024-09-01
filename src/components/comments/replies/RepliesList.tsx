@@ -11,9 +11,11 @@ import gsap from "gsap";
 const RepliesList = ({
   replyId,
   noteId,
+  username,
 }: {
   replyId: string;
   noteId: string;
+  username: string;
 }) => {
   //!ADD GSAP ANIMATION
   useGSAP(() => {
@@ -58,7 +60,13 @@ const RepliesList = ({
         {!replies && <Spinner />}
         {replies &&
           replies.map((comment) => {
-            return <Reply key={comment._id} commentObj={comment} />;
+            return (
+              <Reply
+                username={username}
+                key={comment._id}
+                commentObj={comment}
+              />
+            );
           })}
         <span></span>
       </section>

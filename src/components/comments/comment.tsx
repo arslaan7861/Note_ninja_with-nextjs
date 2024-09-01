@@ -2,9 +2,12 @@ import { DislikeButton, LikeButton } from "../buttons/commetLike";
 import Link from "next/link";
 import commentSchema from "@/lib/DB/commentSchema";
 import { commentType } from "@/types/uploads";
+import { getServerSession } from "next-auth";
+import authOptions from "@/lib/Auth/authOPtions";
 
 async function Comments({ id }: { id: string }) {
-  console.log({ id });
+  const session = await getServerSession(authOptions);
+  const username = session?.user.username || "";
   const {
     replied,
     comments,
@@ -19,7 +22,14 @@ async function Comments({ id }: { id: string }) {
   return (
     <>
       {comments.reverse().map((comment) => {
-        return <Comment key={comment._id} commentObj={comment} noteId={id} />;
+        return (
+          <Comment
+            username={username}
+            key={comment._id}
+            commentObj={comment}
+            noteId={id}
+          />
+        );
       })}
     </>
   );
@@ -28,9 +38,11 @@ async function Comments({ id }: { id: string }) {
 export function Comment({
   commentObj,
   noteId,
+  username,
 }: {
   commentObj: commentType;
   noteId: string;
+  username: string;
 }) {
   const { comment, commentator, dislikes, likes, repliesId, _id } = commentObj;
 
@@ -38,7 +50,7 @@ export function Comment({
     <div className="w-full h-min shadow-md rounded-md flex p-3 gap-3 bg-card_color">
       <article className="bg-contatiner_color h-14 aspect-square rounded-full"></article>
       <article className="flex-grow h-min flex flex-col gap-3">
-        <h4 className="flex gap-2 items-center text-sm text-blue-600">
+        <h4 className="flex gap-2 items-center text-sm text-blue-400">
           @{commentator}
           <span className="text-xs h-full text-contatiner_color">
             {"1h ago"}
@@ -50,19 +62,19 @@ export function Comment({
         <footer className="w-full h-5 sm:h-6 flex items-center gap-4">
           <LikeButton
             likesCount={likes.length}
-            liked
+            liked={likes.includes(username)}
             noteId={noteId}
             commentId={_id.toString()}
           />
           <DislikeButton
             noteId={noteId}
             dislikesCount={dislikes.length}
-            disliked
+            disliked={dislikes.includes(username)}
             commentId={_id.toString()}
           />
           <Link
             href={`/notes/${noteId}/reply/${repliesId}`}
-            className="text-blue-600 text-xs sm:text-sm font-bold"
+            className="text-blue-400 text-xs sm:text-sm font-bold"
           >
             Reply
           </Link>

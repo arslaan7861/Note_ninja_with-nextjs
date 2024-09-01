@@ -2,7 +2,13 @@ import { DislikeButton, LikeButton } from "@/components/buttons/commetLike";
 import { commentType } from "@/types/uploads";
 import React from "react";
 
-function Reply({ commentObj }: { commentObj: commentType }) {
+function Reply({
+  commentObj,
+  username,
+}: {
+  commentObj: commentType;
+  username: string;
+}) {
   const { comment, commentator, dislikes, likes, repliesId, _id } = commentObj;
   return (
     <div className="w-full h-min shadow-md rounded-md flex p-3 gap-3 bg-card_color">
@@ -19,13 +25,13 @@ function Reply({ commentObj }: { commentObj: commentType }) {
         </p>
         <footer className="w-full h-5 sm:h-6 flex items-center gap-4">
           <LikeButton
-            liked
+            liked={likes.includes(username)}
             likesCount={likes.length}
             commentId={_id.toString()}
             noteId={repliesId}
           />
           <DislikeButton
-            disliked
+            disliked={dislikes.includes(username)}
             dislikesCount={dislikes.length}
             commentId={_id.toString()}
             noteId={repliesId}
