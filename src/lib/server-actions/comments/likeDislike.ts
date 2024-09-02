@@ -14,16 +14,21 @@ export async function like({ noteId, commentId }: propsType) {
     if (!session) throw new UnauthenticatedError("login first");
     const { username } = session.user;
 
-    // *GET OR CREATE A NEW COMMENTS OBJECT
+    // *GET COMMENTS OBJECT
     const commentObj = await commentSchema.findOne({ noteId });
-    //* GET OLD LIKES ARAY
+    //* GET OLD LIKES AND DISLIKE ARRAY
     const likesarr: string[] = await commentObj.comments.id(commentId).likes;
+    const dislikesarr: string[] = await commentObj.comments.id(commentId)
+      .dislikes;
     //*CHECK IF ALDEADY LIKES BY THIS USER
     const liked = likesarr.includes(username);
     const resp = { status: 201, liked: true };
     //* IF NOT LIKED ADD USER TO LIKED ARRAY
     if (!liked) {
       commentObj.comments.id(commentId).likes.push(username);
+      commentObj.comments.id(commentId).dislikes = await dislikesarr.filter(
+        (user) => user !== username
+      );
     }
     //*ELSE REMOVE USER FROM LIKED ARRAY
     else {
@@ -51,7 +56,8 @@ export async function disLike({ noteId, commentId }: propsType) {
 
     // *GET OR CREATE A NEW COMMENTS OBJECT
     const commentObj = await commentSchema.findOne({ noteId });
-    //* GET OLD LIKES ARAY
+    //* GET OLD LIKES AND DISLIKE ARRAY
+    const likesarr: string[] = await commentObj.comments.id(commentId).likes;
     const dislikesarr: string[] = await commentObj.comments.id(commentId)
       .dislikes;
     //*CHECK IF ALDEADY dislikes BY THIS USER
@@ -60,6 +66,9 @@ export async function disLike({ noteId, commentId }: propsType) {
     //* IF NOT DISLIKED ADD USER TO LIKED ARRAY
     if (!disliked) {
       commentObj.comments.id(commentId).dislikes.push(username);
+      commentObj.comments.id(commentId).likes = await likesarr.filter(
+        (user) => user !== username
+      );
     } else {
       //*ELSE REMOVE USER FROM LIKED ARRAY
       commentObj.comments.id(commentId).dislikes = await dislikesarr.filter(

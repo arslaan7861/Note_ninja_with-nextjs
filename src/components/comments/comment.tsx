@@ -1,9 +1,9 @@
-import { DislikeButton, LikeButton } from "../buttons/commetLike";
 import Link from "next/link";
 import commentSchema from "@/lib/DB/commentSchema";
 import { commentType } from "@/types/uploads";
 import { getServerSession } from "next-auth";
 import authOptions from "@/lib/Auth/authOPtions";
+import LikeDislikebtn from "../buttons/LikeDislikebtn";
 
 async function Comments({ id }: { id: string }) {
   const session = await getServerSession(authOptions);
@@ -60,17 +60,13 @@ export function Comment({
           {comment}
         </p>
         <footer className="w-full h-5 sm:h-6 flex items-center gap-4">
-          <LikeButton
-            likesCount={likes.length}
+          <LikeDislikebtn
+            likecount={likes.length}
             liked={likes.includes(username)}
             noteId={noteId}
             commentId={_id.toString()}
-          />
-          <DislikeButton
-            noteId={noteId}
-            dislikesCount={dislikes.length}
+            dislikecount={dislikes.length}
             disliked={dislikes.includes(username)}
-            commentId={_id.toString()}
           />
           <Link
             href={`/notes/${noteId}/reply/${repliesId}`}

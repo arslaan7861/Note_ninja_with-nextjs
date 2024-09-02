@@ -1,4 +1,4 @@
-import { DislikeButton, LikeButton } from "@/components/buttons/commetLike";
+import LikeDislikebtn from "@/components/buttons/LikeDislikebtn";
 import { commentType } from "@/types/uploads";
 import React from "react";
 
@@ -24,18 +24,14 @@ function Reply({
           {comment}
         </p>
         <footer className="w-full h-5 sm:h-6 flex items-center gap-4">
-          <LikeButton
+          {/* <LikeDislikebtn
+            likecount={likes.length}
             liked={likes.includes(username)}
-            likesCount={likes.length}
+            noteId={noteId}
             commentId={_id.toString()}
-            noteId={repliesId}
-          />
-          <DislikeButton
+            dislikecount={dislikes.length}
             disliked={dislikes.includes(username)}
-            dislikesCount={dislikes.length}
-            commentId={_id.toString()}
-            noteId={repliesId}
-          />
+          /> */}
         </footer>
       </article>
     </div>
