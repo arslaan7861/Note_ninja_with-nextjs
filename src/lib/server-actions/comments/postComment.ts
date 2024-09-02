@@ -22,7 +22,7 @@ export async function postComment({ comment, noteId }: propsType) {
       (await commentSchema.create({ noteId, comments: [] }));
     //*INSERT NEW COMMENT
     const { _id: repliesId } = await commentSchema.create({
-      noteId,
+      noteId: commentObj._id,
       comments: [{ comment, commentator: session.user.username }],
     });
     const obj = {

@@ -5,9 +5,11 @@ import React from "react";
 function Reply({
   commentObj,
   username,
+  noteId,
 }: {
   commentObj: commentType;
   username: string;
+  noteId: string;
 }) {
   const { comment, commentator, dislikes, likes, repliesId, _id } = commentObj;
   return (
@@ -16,22 +18,22 @@ function Reply({
       <article className="flex-grow h-min flex flex-col gap-3">
         <h4 className="flex gap-2 items-center text-sm text-blue-600">
           @{commentator}
-          <span className="text-xs h-full text-contatiner_color">
+          {/* <span className="text-xs h-full text-contatiner_color">
             {"1h ago"}
-          </span>
+          </span> */}
         </h4>
         <p className="h-min w-full max-h-48 overflow-auto custom_scrollbar">
           {comment}
         </p>
         <footer className="w-full h-5 sm:h-6 flex items-center gap-4">
-          {/* <LikeDislikebtn
+          <LikeDislikebtn
             likecount={likes.length}
             liked={likes.includes(username)}
             noteId={noteId}
             commentId={_id.toString()}
             dislikecount={dislikes.length}
             disliked={dislikes.includes(username)}
-          /> */}
+          />
         </footer>
       </article>
     </div>

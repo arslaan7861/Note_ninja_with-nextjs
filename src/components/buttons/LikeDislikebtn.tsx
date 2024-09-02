@@ -27,35 +27,43 @@ function LikeDislikebtn({
   });
   const handleLike: React.MouseEventHandler<HTMLButtonElement> = async () => {
     try {
-      const resp: { status: number; liked: boolean } = JSON.parse(
-        (await like({ noteId, commentId })) as string
-      );
+      const resp: {
+        status: number;
+        liked: any;
+        disliked: any;
+        likecount: number;
+        dislikecount: number;
+      } = JSON.parse((await like({ noteId, commentId, flag: "r" })) as string);
       if (resp.status == 401) return router.push("/auth/signin");
       setState({
         liked: resp.liked,
-        likecount: resp.liked ? state.likecount + 1 : state.likecount - 1,
-        disliked: resp.liked ? false : state.disliked,
-        dislikecount: resp.liked ? state.dislikecount - 1 : state.dislikecount,
+        likecount: resp.likecount,
+        disliked: resp.disliked,
+        dislikecount: resp.dislikecount,
       });
     } catch (error) {
-      console.log("error while liking comment");
+      console.log("error while liking comment", error);
     }
   };
   const handleDislike: React.MouseEventHandler<
     HTMLButtonElement
   > = async () => {
     try {
-      const resp: { status: number; disliked: boolean } = JSON.parse(
-        (await disLike({ noteId, commentId })) as string
+      const resp: {
+        status: number;
+        liked: any;
+        disliked: any;
+        likecount: number;
+        dislikecount: number;
+      } = JSON.parse(
+        (await disLike({ noteId, commentId, flag: "r" })) as string
       );
       if (resp.status == 401) return router.push("/auth/signin");
       setState({
+        liked: resp.liked,
+        likecount: resp.likecount,
         disliked: resp.disliked,
-        dislikecount: resp.disliked
-          ? state.dislikecount + 1
-          : state.dislikecount - 1,
-        liked: resp.disliked ? false : state.liked,
-        likecount: resp.disliked ? state.likecount - 1 : state.likecount,
+        dislikecount: resp.dislikecount,
       });
     } catch (error) {
       console.log("error while disliking comment");

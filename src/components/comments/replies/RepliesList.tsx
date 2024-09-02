@@ -65,6 +65,7 @@ const RepliesList = ({
                 username={username}
                 key={comment._id}
                 commentObj={comment}
+                noteId={replyId}
               />
             );
           })}

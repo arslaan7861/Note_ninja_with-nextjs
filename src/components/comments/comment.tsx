@@ -52,9 +52,9 @@ export function Comment({
       <article className="flex-grow h-min flex flex-col gap-3">
         <h4 className="flex gap-2 items-center text-sm text-blue-400">
           @{commentator}
-          <span className="text-xs h-full text-contatiner_color">
+          {/* <span className="text-xs h-full text-contatiner_color">
             {"1h ago"}
-          </span>
+          </span> */}
         </h4>
         <p className="h-min w-full max-h-48 overflow-auto custom_scrollbar">
           {comment}
