@@ -14,4 +14,5 @@ export interface commentType {
   dislikes: string[];
   repliesId: string;
   _id: string;
+  time: number;
 }

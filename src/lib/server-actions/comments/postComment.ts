@@ -23,15 +23,19 @@ export async function postComment({ comment, noteId }: propsType) {
     //*INSERT NEW COMMENT
     const { _id: repliesId } = await commentSchema.create({
       noteId: commentObj._id,
-      comments: [{ comment, commentator: session.user.username }],
+      comments: [
+        { comment, commentator: session.user.username, time: Date.now() },
+      ],
     });
     const obj = {
       comment,
       commentator: session.user.username,
       repliesId,
+      time: Date.now(),
     };
     await commentObj.comments.push(obj);
     await commentObj.save();
+    // await commentSchema.deleteMany({});
     //*RETURN SUCCESS MESSAGE
     return JSON.stringify({ status: 201, msg: "commented successfull" });
   } catch (error) {

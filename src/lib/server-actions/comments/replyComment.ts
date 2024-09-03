@@ -19,6 +19,7 @@ export async function replyComment({ comment, repliesId }: propsType) {
     const obj = {
       comment,
       commentator: session.user.username,
+      time: Date.now(),
     };
     //*INSERT COMMENT
     await commentObj.comments.push(obj);

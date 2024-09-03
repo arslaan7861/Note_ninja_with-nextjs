@@ -60,7 +60,7 @@
     @apply block w-56 p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-black focus:border-black;
   }
   .sidebar-cont {
-    @apply bg-white border border-border_color p-4 rounded-md grid grid-rows-2 md:grid-rows-subgrid grid-flow-col auto-cols-[100%] sm:auto-cols-[50%] md:auto-cols-[100%] auto-rows-min gap-4 overflow-auto md:grid-cols-1 md:grid-flow-row h-full;
+    @apply bg-white border border-border_color p-4 rounded-md grid grid-rows-2 md:grid-rows-none grid-flow-col auto-cols-[100%] sm:auto-cols-[50%] md:auto-cols-[100%] auto-rows-min gap-4 overflow-auto md:grid-cols-1 md:grid-flow-row h-full;
   }
   .custom_scrollbar {
     @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border_color;

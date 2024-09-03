@@ -13,6 +13,7 @@ const commentSchema = new mongoose.Schema({
       likes: [String],
       dislikes: [String],
       repliesId: String,
+      time: Number,
     },
   ],
 });
