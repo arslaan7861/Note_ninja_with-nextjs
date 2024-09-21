@@ -152,7 +152,7 @@ function Login() {
 
       <button
         type="submit"
-        className="bg-black disabled:bg-gray-950 text-white uppercase text-lg p-2 rounded-md"
+        className="bg-black flex items-center justify-center w-56 disabled:bg-gray-950 text-white uppercase text-lg p-2 rounded-md"
         disabled={isSubmitting}
       >
         {isSubmitting ? <Spinner /> : "register"}

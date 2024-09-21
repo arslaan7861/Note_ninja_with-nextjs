@@ -1,4 +1,4 @@
-import NotesPage from "@/components/pages/notes";
+import NotesPage from "@/components/sections/notes";
 
 import React, { Suspense } from "react";
 async function Note() {

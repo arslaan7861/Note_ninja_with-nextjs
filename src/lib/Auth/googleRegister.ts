@@ -13,6 +13,7 @@ async function googleRegister(profile: Profile) {
       email: profile.email,
       accountProvider: "google",
       fullname: profile.name,
+      completed: false,
     });
     return { ...newUser, id: newUser._id };
   } catch (error) {

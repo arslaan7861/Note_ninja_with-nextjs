@@ -15,5 +15,6 @@ const userSchema = new mongoose.Schema({
   uploads: [String],
   accountProvider: String,
   image: String,
+  completed: Boolean,
 });
 export default mongoose.models.users || mongoose.model("users", userSchema);

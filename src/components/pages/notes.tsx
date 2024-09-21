@@ -1,8 +1,8 @@
 import noteSchema from "@/lib/DB/noteSchema";
-import { uploadType } from "@/types/uploads";
 import React from "react";
 import Upload from "../cards/upload";
 import connectDB from "@/lib/DB/connectDB";
+import { uploadType } from "@/types/types";
 
 interface propsType {
   searchQuery?: string;
@@ -12,6 +12,12 @@ async function NotesPage({ searchQuery }: propsType) {
   const notes: uploadType[] = await noteSchema.find({});
   return (
     <>
+      {notes?.reverse().map((upload) => {
+        return <Upload uploadData={upload} key={upload.fileId} />;
+      })}{" "}
+      {notes?.reverse().map((upload) => {
+        return <Upload uploadData={upload} key={upload.fileId} />;
+      })}{" "}
       {notes?.reverse().map((upload) => {
         return <Upload uploadData={upload} key={upload.fileId} />;
       })}

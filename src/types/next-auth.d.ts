@@ -13,10 +13,18 @@ declare module "next-auth" {
     picture: string;
   }
   interface Session {
-    user: { username: string; email: string; name: string; image; id: string };
+    user: {
+      username: string;
+      email: string;
+      name: string;
+      image?: string;
+      id: string;
+      completed: boolean;
+    };
   }
   interface Token {
     provider: string;
     id: string;
+    completed: boolean;
   }
 }

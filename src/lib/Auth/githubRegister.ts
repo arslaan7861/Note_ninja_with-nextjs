@@ -17,6 +17,7 @@ const GithubRegister = async (profile: Profile) => {
     accountProvider: "github",
     fullname: profile.name,
     image: profile.avatar_url,
+    completed: false,
   });
 
   return newUser;

@@ -2,10 +2,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @tailwind base;
 @tailwind components;
-
 @tailwind utilities;
 
 @layer components {
+  .btn_primary {
+    @apply bg-primary_color text-card_color px-4 py-2 rounded-md shadow-lg text-center;
+  }
   p,
   span {
     @apply font-primary;
@@ -48,10 +50,10 @@
   }
   /* !NOTES SECTION  */
   .notes__sec {
-    @apply snap-center h-svh w-screen relative z-10 grid grid-cols-1 sm:grid-cols-2 auto-rows-max md:grid-cols-3 lg:grid-cols-4 p-4 gap-4 pb-4 bg-white pt-16 overflow-y-auto scrollbar-none;
+    @apply bg-bg_primary snap-center h-svh w-screen relative z-10 grid grid-cols-2 auto-rows-max md:grid-cols-3 lg:grid-cols-4 p-4 gap-4 pb-4 pt-16 overflow-y-auto scrollbar-none;
   }
   .search__bar {
-    @apply col-span-1 w-full z-30 sm:col-span-2 md:col-span-3 lg:col-span-4 flex sm:flex-row flex-col gap-4 justify-between items-center sticky top-0  max-h-10;
+    @apply w-full z-30 col-span-2 md:col-span-3 lg:col-span-4 flex sm:flex-row flex-col gap-4 justify-between items-center sticky top-0  max-h-10;
   }
   .search__bar > input {
     @apply shadow-md outline-none w-full h-10 p-4 font-semibold;
@@ -64,5 +66,8 @@
   }
   .custom_scrollbar {
     @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border_color;
+  }
+  .input_basic {
+    @apply p-2 px-3 w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500;
   }
 }

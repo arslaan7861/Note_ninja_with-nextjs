@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import authOptions from "@/lib/Auth/authOPtions";
 import LikeDislikebtn from "../buttons/LikeDislikebtn";
 import getTime from "./getTime";
+import getCommentCOunt from "@/lib/server-actions/comments/getCommentCount";
 
 async function Comments({ id }: { id: string }) {
   const session = await getServerSession(authOptions);
@@ -36,7 +37,7 @@ async function Comments({ id }: { id: string }) {
   );
 }
 
-export function Comment({
+export async function Comment({
   commentObj,
   noteId,
   username,
@@ -47,6 +48,7 @@ export function Comment({
 }) {
   const { comment, commentator, dislikes, likes, repliesId, _id, time } =
     commentObj;
+  const replyCount = await getCommentCOunt(repliesId, "c");
   return (
     <div className="w-full h-min shadow-md rounded-md flex p-3 gap-3 bg-card_color">
       <article className="bg-contatiner_color h-14 aspect-square rounded-full"></article>
@@ -73,7 +75,13 @@ export function Comment({
             href={`/notes/${noteId}/reply/${repliesId}`}
             className="text-blue-400 text-xs sm:text-sm font-bold"
           >
-            Reply
+            {replyCount != "0" ? (
+              <>
+                replies <span>{replyCount}</span>
+              </>
+            ) : (
+              "reply"
+            )}
           </Link>
         </footer>
       </article>

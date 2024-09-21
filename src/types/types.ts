@@ -16,3 +16,12 @@ export interface commentType {
   _id: string;
   time: number;
 }
+
+export interface userType {
+  username: string;
+  email: string;
+  name: string;
+  image?: string;
+  id: string;
+  completed: boolean;
+}
