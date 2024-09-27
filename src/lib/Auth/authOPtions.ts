@@ -7,7 +7,7 @@ import GithubProvider from "next-auth/providers/github";
 import GithubRegister from "./githubRegister";
 import GoogleProvider from "next-auth/providers/google";
 import googleRegister from "./googleRegister";
-import { JWT } from "next-auth/jwt";
+
 const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -67,7 +67,6 @@ const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ account, profile, user }) {
       if (account?.provider === "google" && profile) {
-        await connectDB();
         profile = await googleRegister(profile);
       }
       return true;
@@ -101,6 +100,7 @@ const authOptions: NextAuthOptions = {
         name: user.fullname,
         image: user.image,
         id: user._id,
+        completed: user.completed,
       };
 
       return session;

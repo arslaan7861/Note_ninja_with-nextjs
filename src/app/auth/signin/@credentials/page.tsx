@@ -65,7 +65,7 @@ function Login() {
         <input
           {...register("username")}
           type="text"
-          className="p-2 px-3 w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
+          className="input_basic"
           id="username"
           placeholder="Username"
         />
@@ -77,7 +77,7 @@ function Login() {
         <input
           placeholder="Password"
           {...register("password")}
-          className="p-2 px-3 w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
+          className="input_basic"
           type="password"
           id="password"
         />

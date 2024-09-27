@@ -1,30 +1,39 @@
-import { uploadType } from "@/types/uploads";
+import { uploadType } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { DownloadBtn } from "../icons/notecard";
 
 function Upload({ uploadData }: { uploadData: uploadType }) {
   return (
-    <Link
-      href={`/notes/${uploadData._id}`}
-      className="card shrink-0 h-32 text-txtclr relative overflow-hidden z-10 flex items-center gap-2 col-span-1 rounded-md hover:bg-transBlack bg-card_color text-text_color shadow-md"
-    >
-      <section className="relative w-24 h-full shrink-0">
-        <Image src={"/images/book.jpg"} fill alt="book cover page" />
-      </section>
-      <section className="flex-grow flex flex-col py-4 p-2 justify-center gap-2 ">
-        <h4 className=" font-bold uppercase">unit 1</h4>
-        <h5 className="text-ellipsis capitalize w-full font-semibold  line-clamp-1">
-          {uploadData.subject}
-        </h5>
-        <h5 className="text-ellipsis capitalize text-sm w-full font-semibold  line-clamp-1">
-          {uploadData.year} year
-        </h5>
-        <h6 className="text-ellipsis text-secondary_text break-all font-semibold w-full  line-clamp-1">
-          uploaded: {uploadData.uploader}
-        </h6>
-      </section>
-    </Link>
+    <article className="bg-card_color shadow-lg rounded-lg overflow-clip">
+      <div className="md:flex relative">
+        <section className="absolute h-full w-full peer ">
+          <Image fill alt="note cover" src={"/images/book.jpg"}></Image>
+        </section>
+        <section className="p-8 peer-hover:translate-y-0 hover:translate-y-0 transition-transform hover:backdrop-blur-md peer-hover:backdrop-blur-md">
+          <h4 className="mt-2 font-bold leading-6 text-gray-900 text-ellipsis line-clamp-2">
+            {uploadData.subject}
+          </h4>
+          <p className="uppercase tracking-wide text-sm text-black font-semibold mt-2">
+            Unit {2}
+          </p>
+          <div className="mt-2 flex items-center text-gray-600">
+            <span>{"Third year"}</span>
+          </div>
+          <div className="mt-2 flex items-center text-gray-600">
+            {/* <User className="h-5 w-5 mr-2" /> */}
+            <span>Uploaded by @{uploadData.uploader}</span>
+          </div>
+          <div className="mt-4">
+            <button className="btn_primary flex text-base h-10 gap-2">
+              <DownloadBtn />
+              Download notes{" "}
+            </button>
+          </div>
+        </section>
+      </div>
+    </article>
   );
 }
 

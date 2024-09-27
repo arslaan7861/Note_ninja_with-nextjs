@@ -99,7 +99,6 @@ function UploadPage() {
           {...register("note")}
           type="file"
           className="file:p-2 file:border-none file:bg-black file:text-white w-56 bg-gray-300 outline-none rounded-lg placeholder:text-gray-500"
-          placeholder="Username"
           multiple={false}
           accept="application/pdf"
         />

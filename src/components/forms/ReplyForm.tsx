@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-import Spinner from "../loaders/spinner";
 
 const schema = z.object({
   comment: z.string().nonempty("Please enter your comment"),

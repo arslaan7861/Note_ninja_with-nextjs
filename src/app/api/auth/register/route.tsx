@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     await connectDB();
     const data: userType = await req.json();
     data.password = await bcrypt.hash(data.password, 10);
-    const user = await User.create(data);
+    const user = await User.create({ ...data, completed: false });
 
     return Response.json({ username: user.username, ok: true });
   } catch (error: any) {

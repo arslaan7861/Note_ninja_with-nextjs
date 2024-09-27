@@ -1,5 +1,4 @@
 import NotesPage from "@/components/pages/notes";
-
 import React, { Suspense } from "react";
 async function Note() {
   return (
