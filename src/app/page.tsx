@@ -1,3 +1,4 @@
+import HomepageAnimations from "@/animations/homepage";
 import FeaturesSection from "@/components/pages/FeaturesSection";
 import Herosection from "@/components/pages/Herosection";
 import Image from "next/image";
@@ -10,11 +11,11 @@ import Link from "next/link";
  */
 export default function Component() {
   return (
-    <div className="flex flex-col h-full">
-      <main className="flex-1 ">
+    <div className="flex flex-col ">
+      <HomepageAnimations>
         <Herosection />
         <FeaturesSection />
-      </main>
+      </HomepageAnimations>
     </div>
   );
 }

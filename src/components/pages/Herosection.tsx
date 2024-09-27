@@ -1,22 +1,11 @@
-"use client";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 function Herosection() {
-  useGSAP(() => {
-    gsap.from(".animate_form_bottom", {
-      y: "100%",
-      opacity: 0,
-      ease: "power1.inOut",
-      stagger: 0.01,
-      duration: 0.5,
-    });
-  });
   return (
-    <section className="w-full  py-12 md:py-24 lg:py-32 flex flex-col items-center h-screen">
+    <section className="w-full md:h-auto max-h-[calc(100svh - 4rem)] pt-12 flex flex-col items-center justify-around">
       <div className="container px-4 md:px-6">
         <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_550px]">
           <div className="flex flex-col justify-center space-y-4">

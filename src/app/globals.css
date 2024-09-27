@@ -5,6 +5,12 @@
 @tailwind utilities;
 
 @layer components {
+  * {
+    @apply scrollbar-none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
   .btn_primary {
     @apply bg-primary_color text-card_color px-4 py-2 rounded-md shadow-lg text-center;
   }
