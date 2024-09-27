@@ -1,6 +1,6 @@
 "use server";
 import commentSchema from "@/lib/DB/commentSchema";
-import { commentType } from "@/types/uploads";
+import { commentType } from "@/types/types";
 
 export async function fetchReplies(replyId: string) {
   try {

@@ -1,5 +1,4 @@
 "use server";
-import axios from "axios";
 import { getServerSession } from "next-auth";
 import authOptions from "@/lib/Auth/authOPtions";
 import connectDB from "@/lib/DB/connectDB";

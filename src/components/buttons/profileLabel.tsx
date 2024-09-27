@@ -1,5 +1,5 @@
 import React from "react";
-import ProfilePlaceholder from "../icons/profile";
+import { ProfilePlaceholder } from "../icons/profile";
 
 function ProfileLabel({
   username,

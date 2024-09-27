@@ -1,7 +1,7 @@
 "use server";
 
 import commentSchema from "@/lib/DB/commentSchema";
-import { commentType } from "@/types/uploads";
+import { commentType } from "@/types/types";
 
 export default async function getCommentCOunt(noteId: string, flag: "c" | "n") {
   if (flag == "n") {

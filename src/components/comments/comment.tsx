@@ -1,6 +1,6 @@
 import Link from "next/link";
 import commentSchema from "@/lib/DB/commentSchema";
-import { commentType } from "@/types/uploads";
+import { commentType } from "@/types/types";
 import { getServerSession } from "next-auth";
 import authOptions from "@/lib/Auth/authOPtions";
 import LikeDislikebtn from "../buttons/LikeDislikebtn";

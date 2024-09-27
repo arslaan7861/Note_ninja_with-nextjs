@@ -1,7 +1,7 @@
 import LikeDislikebtn from "@/components/buttons/LikeDislikebtn";
 import { commentType } from "@/types/types";
 import React from "react";
-import getTime from "../getTime";
+import getTime from "./getTime";
 
 function Reply({
   commentObj,

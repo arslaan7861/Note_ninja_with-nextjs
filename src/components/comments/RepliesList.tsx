@@ -1,12 +1,13 @@
 "use client";
 import ReplyForm from "@/components/forms/ReplyForm";
-import Reply from "./reply";
+
 import { commentType } from "@/types/types";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { fetchReplies } from "@/lib/server-actions/comments/fetchReplies";
 import Spinner from "@/components/loaders/spinner";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Reply from "./reply";
 
 const RepliesList = ({
   replyId,
