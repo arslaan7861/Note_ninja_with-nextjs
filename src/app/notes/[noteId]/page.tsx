@@ -2,7 +2,7 @@ import Upload from "@/components/cards/upload";
 import connectDB from "@/lib/DB/connectDB";
 import noteSchema from "@/lib/DB/noteSchema";
 import userSchema from "@/lib/DB/userSchema";
-import { uploadType } from "@/types/uploads";
+import { uploadType } from "@/types";
 import Image from "next/image";
 import React from "react";
 type propsType = {
