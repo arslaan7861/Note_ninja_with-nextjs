@@ -18,9 +18,9 @@ function HomepageAnimations({ children }: { children: React.ReactNode }) {
 
     // !FEATURES ANIMATIONS
     gsap.utils.toArray(".featuresHeadings").forEach((e) => {
-      gsap.from(e, {
+      gsap.from(e as HTMLElement, {
         scrollTrigger: {
-          trigger: e,
+          trigger: e as HTMLElement,
           start: "25% 90%",
           end: "top center",
           toggleActions: "play none none reverse",
