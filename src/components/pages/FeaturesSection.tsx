@@ -34,7 +34,7 @@ function FeaturesSection() {
             width="550"
             height="310"
             alt="Image"
-            className="features_desc block mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
+            className="homepage_img block mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
           />
           <article className="flex flex-col justify-center space-y-4">
             <ul className="grid gap-6">

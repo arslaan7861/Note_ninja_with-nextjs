@@ -16,9 +16,9 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className=" scrollbar-none overflow-x-hidden">
+      <body className=" scrollbar-none overflow-x-hidden w-screen">
         <NextAuthSessionProvider>
-          <div className="h-svh w-screen scrollbar-none overflow-x-hidden">
+          <div className="h-svh w-screen scrollbar-none">
             <Navbar />
             <main className="w-screen bg-bg_primary text-text_color pt-16 overflow-y-auto overflow-x-hidden">
               {children}
