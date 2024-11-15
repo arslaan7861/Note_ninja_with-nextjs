@@ -6,7 +6,8 @@ import "./globals.css";
 import NextAuthSessionProvider from "@/components/wrapper/authprovider";
 import Navbar from "@/components/navbar/Navbar";
 import Link from "next/link";
-
+import cachedData from "@/lib/cache/data";
+// cachedData.initialize();
 export default async function RootLayout({
   children,
   notemodal,
@@ -20,7 +21,7 @@ export default async function RootLayout({
         <NextAuthSessionProvider>
           <div className="h-svh w-screen scrollbar-none">
             <Navbar />
-            <main className="w-screen bg-bg_primary text-text_color pt-16 overflow-y-auto overflow-x-hidden">
+            <main className="w-screen relative bg-bg_primary text-text_color pt-16 overflow-y-auto overflow-x-hidden">
               {children}
               {notemodal}
             </main>

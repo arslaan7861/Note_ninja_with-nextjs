@@ -1,5 +1,6 @@
 "use server";
 import authOptions from "@/lib/Auth/authOPtions";
+import cachedData from "@/lib/cache/data";
 import commentSchema from "@/lib/DB/commentSchema";
 import { UnauthenticatedError } from "@/lib/errors/auth";
 import { getServerSession } from "next-auth";

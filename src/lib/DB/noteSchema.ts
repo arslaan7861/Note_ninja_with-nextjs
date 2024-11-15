@@ -25,6 +25,14 @@ const uploadSchema = new mongoose.Schema({
     type: String,
     required: [true, "please provide year"],
   },
+  time: {
+    type: String,
+    required: [true, "please provide time"],
+  },
+  unit: {
+    type: String,
+    required: [true, "please provide unit number"],
+  },
 });
 
 export default mongoose.models.uploads ||

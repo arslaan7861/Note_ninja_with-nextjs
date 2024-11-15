@@ -20,6 +20,8 @@ async function uploadNote(formData: FormData) {
     const fileId = formData.get("fileId") as string;
     const webViewLink = formData.get("webViewLink") as string;
     const webContentLink = formData.get("webContentLink") as string;
+    const unit = formData.get("unit") as string;
+    const time = new Date().toDateString();
 
     const upload = await Uploads.create({
       year,
@@ -28,6 +30,8 @@ async function uploadNote(formData: FormData) {
       fileId,
       webContentLink,
       webViewLink,
+      unit,
+      time,
     });
     await user.uploads.push(upload._id);
     await user.save();

@@ -59,7 +59,7 @@
     @apply bg-bg_primary snap-center h-svh w-screen relative z-10 grid grid-cols-2 auto-rows-max md:grid-cols-3 lg:grid-cols-4 p-4 gap-4 pb-4 pt-16 overflow-y-auto scrollbar-none;
   }
   .search__bar {
-    @apply w-full z-30 col-span-2 md:col-span-3 lg:col-span-4 flex sm:flex-row flex-col gap-4 justify-between items-center sticky top-0  max-h-10;
+    @apply w-full z-30 col-span-2 md:col-span-3 lg:col-span-4 flex sm:flex-row flex-col gap-4 justify-between items-center fixed top-16  max-h-10;
   }
   .search__bar > input {
     @apply shadow-md outline-none w-full h-10 p-4 font-semibold;

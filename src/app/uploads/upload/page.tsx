@@ -17,6 +17,10 @@ const schema = z.object({
     .string()
     .optional()
     .refine((course) => course, "please select year"),
+  unit: z
+    .string()
+    .optional()
+    .refine((course) => course, "please select unit"),
   subject: z
     .string()
     .optional()
@@ -71,6 +75,8 @@ function UploadPage() {
       formData.set("webContentLink", fileres.webContentLink);
       formData.append("subject", data.subject as string);
       formData.append("year", data.year as string);
+      formData.append("unit", data.unit as string);
+
       const resp: string | undefined = await uploadNote(formData);
       if (!resp)
         return setError("root", { message: "seomthing went please try again" });
@@ -116,6 +122,19 @@ function UploadPage() {
         </select>
         {errors.year && (
           <p className="text-red-500 px-2 text-xs">{`${errors.year.message}`}</p>
+        )}
+      </div>
+      <div className="flex flex-col w-min ">
+        <select id="unit" {...register("unit")}>
+          <option value={""}>select unit</option>
+          <option value={"1"}>unit 1</option>
+          <option value={"2"}>unit 2</option>
+          <option value={"3"}>unit 3</option>
+          <option value={"4"}>unit 4</option>
+          <option value={"5"}>unit 5</option>
+        </select>
+        {errors.unit && (
+          <p className="text-red-500 px-2 text-xs">{`${errors.unit.message}`}</p>
         )}
       </div>
 

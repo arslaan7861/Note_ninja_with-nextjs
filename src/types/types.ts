@@ -6,6 +6,8 @@ export interface uploadType {
   webContentLink: string;
   webViewLink: string;
   _id: string;
+  time: string;
+  unit: string;
 }
 export interface commentType {
   comment: string;

@@ -17,8 +17,6 @@ const authOptions: NextAuthOptions = {
         password: { label: "password", type: "password" },
       },
       async authorize(credentials, req) {
-        await connectDB();
-
         if (!credentials) {
           throw new Error("provide proper credentials");
         }
@@ -78,7 +76,6 @@ const authOptions: NextAuthOptions = {
       if (account?.provider == "credentials")
         console.log({ credsToken: token });
 
-      await connectDB();
       if (token.provider === "google") {
         const user = await User.findOne({
           email: profile?.email || token.email,
@@ -92,7 +89,7 @@ const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       // console.log({ sessionToken: token.id });
-      await connectDB();
+
       const user = await User.findById(token.id);
       session.user = {
         username: user?.username,

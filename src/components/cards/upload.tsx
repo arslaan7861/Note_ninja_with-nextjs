@@ -1,39 +1,32 @@
 import { uploadType } from "@/types/types";
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
-import { DownloadBtn } from "../icons/notecard";
+import { BookIcon } from "../icons/notecard";
+import Link from "next/link";
 
 function Upload({ uploadData }: { uploadData: uploadType }) {
   return (
-    <article className="bg-card_color shadow-lg rounded-lg overflow-clip">
-      <div className="md:flex relative">
-        <section className="absolute h-full w-full peer ">
-          <Image fill alt="note cover" src={"/images/book.jpg"}></Image>
-        </section>
-        <section className="p-8 peer-hover:translate-y-0 hover:translate-y-0 transition-transform hover:backdrop-blur-md peer-hover:backdrop-blur-md">
-          <h4 className="mt-2 font-bold leading-6 text-gray-900 text-ellipsis line-clamp-2">
-            {uploadData.subject}
-          </h4>
-          <p className="uppercase tracking-wide text-sm text-black font-semibold mt-2">
-            Unit {2}
-          </p>
-          <div className="mt-2 flex items-center text-gray-600">
-            <span>{"Third year"}</span>
+    <Link href={`/notes/${uploadData._id}`} className="note_card">
+      <article className="h-full w-full bg-card_color flex flex-col rounded-md p-4 hover:scale-105 transition-all">
+        <div className="w-full h-min flex gap-4">
+          <BookIcon className="h-16 shrink-0 aspect-square text-white bg-primary_color rounded-md p-3" />
+          <div className="flex-grow flex flex-col gap-1 text-gray-600 text-sm">
+            <span className="line-clamp-1 break-all flex-1 font-semibold h-min text-black text-base">
+              {uploadData.subject}
+            </span>
+            <p className="">
+              <span className="capitalize">{uploadData.year} </span>
+              year- unit {uploadData.unit || 1}
+            </p>
+            <p>
+              uploaded by -{" "}
+              <span className="text-black">@{uploadData.uploader}</span>
+            </p>
+            <p>uploaded at {uploadData.time || "Sat Sep 28 2023"}</p>
           </div>
-          <div className="mt-2 flex items-center text-gray-600">
-            {/* <User className="h-5 w-5 mr-2" /> */}
-            <span>Uploaded by @{uploadData.uploader}</span>
-          </div>
-          <div className="mt-4">
-            <button className="btn_primary flex text-base h-10 gap-2">
-              <DownloadBtn />
-              Download notes{" "}
-            </button>
-          </div>
-        </section>
-      </div>
-    </article>
+        </div>
+        <div></div>
+      </article>
+    </Link>
   );
 }
 

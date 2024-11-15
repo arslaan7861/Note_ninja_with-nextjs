@@ -4,7 +4,6 @@ import User from "@/lib/DB/userSchema";
 
 async function googleRegister(profile: Profile) {
   try {
-    await connectDB();
     // await User.deleteMany({});
     const user = await User.findOne({ username: profile.email?.split("@")[0] });
     if (user) return { ...user, sub: user._id };

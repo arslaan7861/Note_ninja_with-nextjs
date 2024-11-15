@@ -1,3 +1,4 @@
+import cachedData from "@/lib/cache/data";
 import connectDB from "@/lib/DB/connectDB";
 import noteSchema from "@/lib/DB/noteSchema";
 import { uploadType } from "@/types/types";
@@ -10,8 +11,10 @@ type propsType = {
 };
 
 async function page({ params }: propsType) {
-  await connectDB();
-  const note: uploadType = await noteSchema.findById(params.noteId);
+  const note: uploadType =
+    (await cachedData.find(params.noteId)) ||
+    (await noteSchema.findById(params.noteId));
+  console.log({ note });
 
   return (
     <main className="h-min border border-red-100 pt-4 sm:pt-0 md:h-72 bg-card_color  relative overflow-hidden z-10 text-text_color flex-col sm:flex-row flex items-center gap-2 col-span-3 row-span-1 rounded-md hover:bg-transBlack shadow-md">

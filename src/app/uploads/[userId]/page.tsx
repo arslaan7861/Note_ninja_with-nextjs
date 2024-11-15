@@ -1,3 +1,4 @@
+import NoteCardAnimations from "@/animations/NoteCard";
 import UploadButton from "@/components/buttons/UploadButton";
 import Upload from "@/components/cards/upload";
 import getUploads from "@/lib/server-actions/uploads/getUploads";
@@ -18,6 +19,7 @@ async function Uploads({ params }: propsType) {
 
   return (
     <div className="h-svh w-screen pt-16 flex flex-col ">
+      <NoteCardAnimations />
       <UploadButton></UploadButton>
       {!uploads ? (
         <Link

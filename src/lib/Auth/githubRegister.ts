@@ -3,7 +3,6 @@ import connectDB from "../DB/connectDB";
 import User from "../DB/userSchema";
 
 const GithubRegister = async (profile: Profile) => {
-  await connectDB();
   // await User.deleteMany({});
   const user = await User.findOne({ username: profile.login });
 
